@@ -1,5 +1,8 @@
 {
-  "name": "client-mobile-iot",
-  "integrations": {},
+  "name": "client-mobile",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }
