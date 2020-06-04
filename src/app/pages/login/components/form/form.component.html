@@ -1,0 +1,34 @@
+<form #userForm="ngForm" (ngSubmit)='onSubmit(userForm)'>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" #loginEmail='ngModel' [(ngModel)]="userLogin.email" name="email"
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+      required [ngClass]="{'is-invalid' : !(loginEmail.valid || !loginEmail.touched)}">
+    </ion-input>
+  </ion-item>
+
+  <div class="invalid-feedback" [hidden]="loginEmail.valid || !loginEmail.touched">
+    Please insert a valid email
+  </div>
+
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="text" class="form-control" [(ngModel)]="userLogin.password" name="password"
+      #loginPassword='ngModel' [ngClass]="{'is-invalid' : !(loginPassword.valid || !loginPassword.touched)}" required
+      minlength=5>
+    </ion-input>
+  </ion-item>
+
+
+  <div class="invalid-feedback" [hidden]="loginPassword.valid || !loginPassword.touched">
+    Please insert a valid password
+  </div>
+  <div class="invalid-feedback" [hidden]="!loginPassword.errors?.minlength">
+    aggiungi altri {{loginPassword.errors?.minlength?.requiredLength - loginPassword.errors?.minlength?.actualLength}}
+    caratteri
+  </div>
+
+  <ion-button style="padding: 10px 16px;" color="dark" size='medium' fill='outline' (click)="help(userForm)">
+    Submit </ion-button>
+
+</form>
