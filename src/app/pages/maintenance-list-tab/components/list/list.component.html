@@ -6,14 +6,6 @@
             <p>ID: {{item.id}}</p><br>
             <h3>Macchinario: {{item.machine.name}}</h3><br>
             <h3>Tipo: {{item.type}}</h3><br>
-            <p>PASSI:</p>
-            <h6 *ngFor="let i of item.stepList">
-                {{i.description}}
-                <p *ngFor="let att of i.attachmentList">
-                    {{att.path}}
-                </p>
-            </h6>
-
         </ion-label>
     </ion-item>
 </ion-list>
