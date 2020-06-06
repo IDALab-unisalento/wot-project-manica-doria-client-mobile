@@ -1,8 +1,12 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
+
+
 /** Ionic CSS Variables **/
 :root {
+  
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -76,13 +80,133 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
+@media (prefers-color-scheme: light) {
+
+  body .md body , .ios body{
+      /* LIGHT */
+    --dark-light: #64767d;
+    --primary-light: #43afc2ff;
+    --danger-light: #fa745dff;
+    --warning-light: #ebb26cff;
+    --light-light: #ddd9d4ff;
+
+    /* NORMAL */
+    --dark: #445155;
+    --primary: #308695ff;
+    --danger: #f95335ff;
+    --warning: #e69d45ff;
+    --light: #d4cfc9ff;
+
+    /* DARKER */
+    --dark-dark: #2c3436ff;
+    --primary-dark: #1f565fff;
+    --danger-dark: #ba2106ff;
+    --warning-dark: #a96717ff;
+    --light-dark: hsl(33, 11%, 52%);
+    
+    --ion-background-color: var(--light);
+    --ion-background-color-rgb: 212,207,201;
+
+    --ion-text-color: var(--dark);
+    --ion-text-color-rgb: 68, 81, 85;;
+
+    --ion-border-color: #222222;
+
+    --ion-color-step-950: hsl(33, 10%, 12%);
+    --ion-color-step-900: hsl(33, 10%, 16%);
+    --ion-color-step-850: hsl(33, 10%, 21%);
+    --ion-color-step-800: hsl(33, 10%, 25%);
+    --ion-color-step-750: hsl(33, 10%, 30%);
+    --ion-color-step-700: hsl(33, 10%, 35%);
+    --ion-color-step-650: hsl(33, 10%, 40%);
+    --ion-color-step-600: hsl(33, 10%, 44%);
+    --ion-color-step-550: hsl(33, 10%, 49%);
+    --ion-color-step-500: hsl(33, 10%, 54%);
+    --ion-color-step-450: hsl(33, 10%, 58%);
+    --ion-color-step-400: hsl(33, 10%, 63%);
+    --ion-color-step-350: hsl(33, 10%, 67%);
+    --ion-color-step-300: hsl(33, 10%, 72%);
+    --ion-color-step-250: hsl(33, 10%, 77%);
+    --ion-color-step-200: hsl(33, 10%, 82%);
+    --ion-color-step-150: hsl(33, 10%, 86%);
+    --ion-color-step-100: hsl(33, 10%, 91%);
+    --ion-color-step-50: hsl(33, 10%, 95%);
+
+    --ion-item-background: --light-dark;
+
+    --ion-toolbar-background: --light;
+
+    --ion-tab-bar-background: --light-dark;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
-  /*
-   * Dark Colors
-   * -------------------------------------------
+   /*
+   *  --------------------
+   * |     Dark Theme     |
+   *  --------------------
    */
 
-  body {
+  body, .md body , .ios body{
+
+       /* LIGHT */
+    --dark-light: #64767d;
+    --primary-light: #43afc2ff;
+    --danger-light: #fa745dff;
+    --warning-light: #ebb26cff;
+    --light-light: #ddd9d4ff;
+
+    /* DARK */
+    --dark: #171b1c;
+    --primary: #276c78ff;
+    --danger: #e92907ff;
+    --warning: #d4821dff;
+    --light: #afa69bff;
+
+    /* DARKER */
+    --dark-darker: #121617;
+    --primary-darker: #1f565fff;
+    --danger-darker: #ba2106ff;
+    --warning-darer: #a96717ff;
+    --light-darker: #928677ff;
+    
+    --ion-background-color: var(--dark);
+    --ion-background-color-rgb: 23, 27, 28;
+
+    --ion-text-color: var(--light-light);
+    --ion-text-color-rgb: 212,207,201;
+
+    --ion-border-color: #222222;
+
+    --ion-color-step-50: hsl(197, 10%, 12%);
+    --ion-color-step-100: hsl(197, 10%, 16%);
+    --ion-color-step-150: hsl(197, 10%, 21%);
+    --ion-color-step-200: hsl(197, 10%, 25%);
+    --ion-color-step-250: hsl(197, 10%, 30%);
+    --ion-color-step-300: hsl(197, 10%, 35%);
+    --ion-color-step-350: hsl(197, 10%, 40%);
+    --ion-color-step-400: hsl(197, 10%, 44%);
+    --ion-color-step-450: hsl(197, 10%, 49%);
+    --ion-color-step-500: hsl(197, 10%, 54%);
+    --ion-color-step-550: hsl(197, 10%, 58%);
+    --ion-color-step-600: hsl(197, 10%, 63%);
+    --ion-color-step-650: hsl(197, 10%, 67%);
+    --ion-color-step-700: hsl(197, 10%, 72%);
+    --ion-color-step-750: hsl(197, 10%, 77%);
+    --ion-color-step-800: hsl(197, 10%, 82%);
+    --ion-color-step-850: hsl(197, 10%, 86%);
+    --ion-color-step-900: hsl(197, 10%, 91%);
+    --ion-color-step-950: hsl(197, 10%, 95%);
+
+    --ion-item-background: --dark;
+
+    --ion-toolbar-background: --darker;
+
+    --ion-tab-bar-background: --darker;
+
+
+
+    /* IONIC VARIABLES */
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;
@@ -145,84 +269,5 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
-  }
-
-  /*
-   * iOS Dark Theme
-   * -------------------------------------------
-   */
-
-  .ios body {
-    --ion-background-color: #000000;
-    --ion-background-color-rgb: 0,0,0;
-
-    --ion-text-color: #ffffff;
-    --ion-text-color-rgb: 255,255,255;
-
-    --ion-color-step-50: #0d0d0d;
-    --ion-color-step-100: #1a1a1a;
-    --ion-color-step-150: #262626;
-    --ion-color-step-200: #333333;
-    --ion-color-step-250: #404040;
-    --ion-color-step-300: #4d4d4d;
-    --ion-color-step-350: #595959;
-    --ion-color-step-400: #666666;
-    --ion-color-step-450: #737373;
-    --ion-color-step-500: #808080;
-    --ion-color-step-550: #8c8c8c;
-    --ion-color-step-600: #999999;
-    --ion-color-step-650: #a6a6a6;
-    --ion-color-step-700: #b3b3b3;
-    --ion-color-step-750: #bfbfbf;
-    --ion-color-step-800: #cccccc;
-    --ion-color-step-850: #d9d9d9;
-    --ion-color-step-900: #e6e6e6;
-    --ion-color-step-950: #f2f2f2;
-
-    --ion-toolbar-background: #0d0d0d;
-
-    --ion-item-background: #000000;
-  }
-
-
-  /*
-   * Material Design Dark Theme
-   * -------------------------------------------
-   */
-
-  .md body {
-    --ion-background-color: #121212;
-    --ion-background-color-rgb: 18,18,18;
-
-    --ion-text-color: #ffffff;
-    --ion-text-color-rgb: 255,255,255;
-
-    --ion-border-color: #222222;
-
-    --ion-color-step-50: #1e1e1e;
-    --ion-color-step-100: #2a2a2a;
-    --ion-color-step-150: #363636;
-    --ion-color-step-200: #414141;
-    --ion-color-step-250: #4d4d4d;
-    --ion-color-step-300: #595959;
-    --ion-color-step-350: #656565;
-    --ion-color-step-400: #717171;
-    --ion-color-step-450: #7d7d7d;
-    --ion-color-step-500: #898989;
-    --ion-color-step-550: #949494;
-    --ion-color-step-600: #a0a0a0;
-    --ion-color-step-650: #acacac;
-    --ion-color-step-700: #b8b8b8;
-    --ion-color-step-750: #c4c4c4;
-    --ion-color-step-800: #d0d0d0;
-    --ion-color-step-850: #dbdbdb;
-    --ion-color-step-900: #e7e7e7;
-    --ion-color-step-950: #f3f3f3;
-
-    --ion-item-background: #1e1e1e;
-
-    --ion-toolbar-background: #1f1f1f;
-
-    --ion-tab-bar-background: #1f1f1f;
   }
 }

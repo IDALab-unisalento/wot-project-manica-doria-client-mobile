@@ -1,9 +1,43 @@
+
 .is-invalid {
-    color: #eb445a;
+    color: #c00000;
 }
 
 .invalid-feedback {
-    color: red;
-    font-size: 12px;
-    padding: 16px
+    color: #c00000;
+    text-shadow: black;
+    font-size: 0.75rem;
+    padding: 0.5rem 2rem
 }
+
+/*  ----------------
+          DARK 
+    ---------------- */
+
+@media(prefers-color-scheme: dark){
+
+    .button {
+        padding: 10px 14px;
+        --border-color: var(--light-light);
+        --color: var(--light-light);
+        --background-activated: var(--light-light);
+    }
+}
+
+/*  ----------------
+         LIGHT 
+    ---------------- */
+
+@media(prefers-color-scheme: light){
+
+    .button {
+        padding: 10px 14px;
+        --border-color: var(--dark);
+        --color: var(--dark);
+        --background-activated: var(--dark-dark);
+    }
+}
+
+
+
+

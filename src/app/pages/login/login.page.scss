@@ -1,9 +1,15 @@
-@media (prefers-color-scheme: dark) {
-
-ion-card, ion-item, ion-input{
-
-    background-color: lightblue;
-    
+.grad-background {
+    background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
 }
 
+@media(prefers-color-scheme: dark){
+    .text {
+    color: var(--light-light);
+}
+}
+
+@media(prefers-color-scheme: light){
+    .text {
+    color: var(--dark-dark);
+}
 }

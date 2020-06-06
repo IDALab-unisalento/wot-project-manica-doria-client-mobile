@@ -1,26 +1,26 @@
-<form #userForm="ngForm" (ngSubmit)='onSubmit(userForm)'>
+<form #loginForm="ngForm" (ngSubmit)='login(loginForm.value)'>
   <ion-item>
     <ion-label position="floating">Email</ion-label>
     <ion-input type="email" #loginEmail='ngModel' [(ngModel)]="userLogin.email" name="email"
       pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-      required [ngClass]="{'is-invalid' : !(loginEmail.valid || !loginEmail.touched)}">
+      required [ngClass]="{'is-invalid' : !(loginEmail.valid || !loginEmail.dirty)}">
     </ion-input>
   </ion-item>
 
-  <div class="invalid-feedback" [hidden]="loginEmail.valid || !loginEmail.touched">
+  <div class="invalid-feedback" [hidden]="loginEmail.valid || !loginEmail.dirty">
     Please insert a valid email
   </div>
 
   <ion-item>
     <ion-label position="floating">Password</ion-label>
-    <ion-input type="text" class="form-control" [(ngModel)]="userLogin.password" name="password"
-      #loginPassword='ngModel' [ngClass]="{'is-invalid' : !(loginPassword.valid || !loginPassword.touched)}" required
+    <ion-input type="password" class="form-control" [(ngModel)]="userLogin.password" name="password"
+      #loginPassword='ngModel' [ngClass]="{'is-invalid' : !(loginPassword.valid || !loginPassword.dirty)}" required
       minlength=5>
     </ion-input>
   </ion-item>
 
 
-  <div class="invalid-feedback" [hidden]="loginPassword.valid || !loginPassword.touched">
+  <div class="invalid-feedback" [hidden]="loginPassword.valid || !loginPassword.dirty">
     Please insert a valid password
   </div>
   <div class="invalid-feedback" [hidden]="!loginPassword.errors?.minlength">
@@ -28,7 +28,7 @@
     caratteri
   </div>
 
-  <ion-button style="padding: 10px 16px;" color="dark" size='medium' fill='outline' (click)="help(userForm)">
+  <ion-button type="submit" class="button" mode="ios" size='medium' fill='outline' [disabled]="!loginForm.valid">
     Submit </ion-button>
 
 </form>
