@@ -11,13 +11,13 @@ import { AppComponent } from './app.component';
 import { MaintenanceService } from './services/maintenance.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {UserService} from './services/user.service';
-import {AttachmentService} from './services/attachment.service';
-import {BeaconService} from './services/beacon.service';
-import {MachineService} from './services/machine.service';
-import {StepService} from './services/step.service';
-import {ZoneService} from './services/zone.service';
-import {UserMaintenanceService} from './services/user-maintenance.service';
+import { UserService } from './services/user.service';
+import { AttachmentService } from './services/attachment.service';
+import { BeaconService } from './services/beacon.service';
+import { MachineService } from './services/machine.service';
+import { StepService } from './services/step.service';
+import { ZoneService } from './services/zone.service';
+import { UserMaintenanceService } from './services/user-maintenance.service';
 
 @NgModule({
   declarations: [AppComponent],

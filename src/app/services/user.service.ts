@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {User} from '../models/user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { ApiVariables } from '../common/ApiVariables';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
-const getAllUser = 'http://localhost:8080/api/user/getAll';
-const getUserById = 'http://localhost:8080/api/user/getById/';
-const saveUser = 'http://localhost:8080/api/user/save';
-const deleteUser = 'http://localhost:8080/api/user/delete/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private getAllUserUrl = ApiVariables.apiUrlUser + '/getAll';
+  private getUserByIdUrl = ApiVariables.apiUrlUser + '/getById/';
+  private saveUserUrl = ApiVariables.apiUrlUser + '/save';
+  private deleteUserUrl = ApiVariables.apiUrlUser + '/delete/';
+
   constructor(private http: HttpClient) { }
 
   getAllUser(): Observable<User[]> {
-    return this.http.get<User[]>(getAllUser);
+    return this.http.get<User[]>(this.getAllUserUrl);
   }
 
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(getUserById + id);
+    return this.http.get<User>(this.getUserByIdUrl + id);
   }
 
   saveUser(user: User): Observable<User> {
-    return this.http.post<User>(saveUser, user, httpOptions);
+    return this.http.post<User>(this.saveUserUrl, user, httpOptions);
   }
 
   deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(deleteUser + id);
+    return this.http.delete<User>(this.deleteUserUrl + id);
   }
 }
