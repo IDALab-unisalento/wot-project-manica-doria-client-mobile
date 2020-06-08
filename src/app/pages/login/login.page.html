@@ -2,8 +2,17 @@
   <div style="padding-top: 8rem;">
     <ion-card class="card grad-background">
       <ion-card-header>
-        <ion-card-title class="text">Safe Maintenance</ion-card-title>
-        <ion-card-subtitle class="text">Login</ion-card-subtitle>
+
+        <ion-card-title class="text">
+          <ion-row>
+            <ion-col>
+              <span *ngIf="prefersDark; then thenBlock else elseBlock"></span>
+            </ion-col>
+            <ion-col style="padding: 1rem;">
+              Safe Maintenance
+            </ion-col>
+          </ion-row>
+        </ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
@@ -12,3 +21,10 @@
     </ion-card>
   </div>
 </ion-content>
+
+<ng-template #thenBlock>
+  <img src="../../../assets/logow.png" width="80px" height="80px" />
+</ng-template>
+<ng-template #elseBlock>
+  <img src="../../../assets/logob.png" width="80px" height="80px" />
+</ng-template>

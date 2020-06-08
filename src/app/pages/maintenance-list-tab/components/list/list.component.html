@@ -1,11 +1,9 @@
-<h1 class="test">Ciao</h1>
-
 <ion-list *ngFor="let item of maintenanceList">
-    <ion-item>
-        <ion-label>
-            <p>ID: {{item.id}}</p><br>
-            <h3>Macchinario: {{item.machine.name}}</h3><br>
-            <h3>Tipo: {{item.type}}</h3><br>
+    <ion-item *ngFor="let maintenance of maintenanceList" lines="full">
+        <ion-label class="ion-text-wrap">
+            <h2 class="warning-text"><b>Nome Macchina</b></h2>
+            <p class="light-text">{{maintenance.type}}</p>
+            <p class="light-text">{{maintenance.machine.name}}</p>
         </ion-label>
     </ion-item>
 </ion-list>
