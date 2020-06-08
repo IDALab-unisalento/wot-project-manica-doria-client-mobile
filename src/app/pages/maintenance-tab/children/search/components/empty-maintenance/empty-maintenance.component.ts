@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-empty-maintenance',
   templateUrl: './empty-maintenance.component.html',
   styleUrls: ['./empty-maintenance.component.scss'],
 })
-export class EmptyMaintenanceComponent implements OnInit {
+export class EmptyMaintenanceComponent implements AfterViewInit {
+  prefersDark: boolean;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngAfterViewInit(): void {
+    this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
 
 }

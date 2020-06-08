@@ -6,8 +6,8 @@
 
   <ion-card-content>
     <ion-row>
-      <ion-col offset="3" size="6">
-        <img src="../../../../../assets/wrench.png" width="128px" height="128px" />
+      <ion-col offset="4" size="6">
+        <span *ngIf="prefersDark; then thenBlock else elseBlock"></span>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -17,3 +17,10 @@
     </ion-row>
   </ion-card-content>
 </ion-card>
+
+<ng-template #thenBlock>
+  <img src="../../../../../../../assets/wrench/wrench-dark.png" width="80px" height="80px" />
+</ng-template>
+<ng-template #elseBlock>
+  <img src="../../../../../../../assets/wrench/wrench-light.png" width="80px" height="80px" />
+</ng-template>
