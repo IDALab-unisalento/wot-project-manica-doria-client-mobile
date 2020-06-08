@@ -1,11 +1,8 @@
-.grad-background {
-    background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
-}
-
 @media(prefers-color-scheme: dark){
 
     .light-text {
         color: var(--light);
+        padding-left: 0.5rem;
     }
     .warning-text {
         color: var(--warning-light)
@@ -20,6 +17,7 @@
 
     .light-text {
         color: var(--dark);
+        padding-left: 0.5rem;
     }
     .warning-text {
         color: var(--warning-dark)

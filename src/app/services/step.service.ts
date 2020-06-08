@@ -1,7 +1,7 @@
+import { Step } from './../models/step';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Step } from '../models/step';
 import { ApiVariables } from '../common/ApiVariables';
 
 const httpOptions = {
@@ -17,6 +17,7 @@ export class StepService {
 
   private getAllStepUrl = ApiVariables.apiUrlStep + '/getAll';
   private getStepByIdUrl = ApiVariables.apiUrlStep + '/getById/';
+  private getStepByMaintenanceIdUrl = ApiVariables.apiUrlStep + '/getByMaintenanceId/';
   private saveStepUrl = ApiVariables.apiUrlStep + '/save';
   private deleteStepUrl = ApiVariables.apiUrlStep + '/delete/';
 
@@ -36,5 +37,9 @@ export class StepService {
 
   deleteStep(id: string): Observable<Step> {
     return this.http.delete<Step>(this.deleteStepUrl + id);
+  }
+
+  getStepByMaintenanceId(id: number): Observable<Step[]> {
+    return this.http.get<Step[]>(this.getStepByMaintenanceIdUrl + id);
   }
 }

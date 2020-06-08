@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MaintenanceService } from '../../../../services/maintenance.service';
 import { Maintenance } from '../../../../models/maintenance';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +13,12 @@ export class ListComponent implements OnInit {
 
   maintenanceList: Maintenance[];
 
-  constructor(private maintenanceService: MaintenanceService) { }
+  constructor(
+    private maintenanceService: MaintenanceService,
+    private datasharing: DataSharingService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.maintenanceService.getAllMaintenaceByUser().subscribe(data => {
@@ -20,7 +27,8 @@ export class ListComponent implements OnInit {
     });
   }
 
-    showDetails(maintenance: Maintenance) {
-        console.log(maintenance);
-    }
+  showDetails(maintenance: Maintenance) {
+    this.datasharing.setCurrentMaintenance(maintenance);
+    this.router.navigate([maintenance.id], { relativeTo: this.route.parent });
+  }
 }
