@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MaintenanceService } from '../../../../services/maintenance.service';
-import { Maintenance } from '../../../../models/maintenance';
+import {Maintenance} from '../../../../models/maintenance';
+import {MaintenanceService} from '../../../../services/maintenance.service';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +20,8 @@ export class ListComponent implements OnInit {
     });
   }
 
-    showDetails(maintenance: Maintenance) {
-        console.log(maintenance);
-    }
+  showDetails(maintenance: Maintenance) {
+    console.log(maintenance);
+  }
+
 }

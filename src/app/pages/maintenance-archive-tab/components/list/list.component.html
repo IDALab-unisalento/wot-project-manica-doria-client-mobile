@@ -1,0 +1,9 @@
+<ion-list>
+  <ion-item button *ngFor="let maintenance of maintenanceList" (click)="showDetails(maintenance)" lines="full">
+    <ion-label class="ion-text-wrap">
+      <h2 class="warning-text"><b>{{maintenance.name}}</b></h2>
+      <p class="light-text">{{maintenance.type}}</p>
+      <p class="light-text">{{maintenance.machine.name}}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>

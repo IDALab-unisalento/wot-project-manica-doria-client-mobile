@@ -148,4 +148,4 @@ dist
 
 # Build ios android Folder
 platforms/
-**/common/ApiVariables.ts
+**/ApiVariables.ts

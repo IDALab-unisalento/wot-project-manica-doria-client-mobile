@@ -4,6 +4,8 @@ import {User} from './user';
 export interface Maintenance {
 
     id?: number;
+    name: string;
+    description: string;
     date?: Date;
     status?: string;
     type?: string;

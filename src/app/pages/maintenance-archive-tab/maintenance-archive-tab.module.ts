@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MaintenanceArchiveTabPageRoutingModule } from './maintenance-archive-tab-routing.module';
 
 import { MaintenanceArchiveTabPage } from './maintenance-archive-tab.page';
+import {ListComponent} from './components/list/list.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MaintenanceArchiveTabPage } from './maintenance-archive-tab.page';
     IonicModule,
     MaintenanceArchiveTabPageRoutingModule
   ],
-  declarations: [MaintenanceArchiveTabPage]
+  declarations: [MaintenanceArchiveTabPage, ListComponent]
 })
 export class MaintenanceArchiveTabPageModule {}
