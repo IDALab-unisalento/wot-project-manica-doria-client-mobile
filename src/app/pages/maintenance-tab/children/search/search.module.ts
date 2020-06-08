@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { SearchPageRoutingModule } from './search-routing.module';
 
 import { SearchPage } from './search.page';
+import { EmptyMaintenanceComponent } from './components/empty-maintenance/empty-maintenance.component';
+import { FillMaintenanceComponent } from './components/fill-maintenance/fill-maintenance.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { SearchPage } from './search.page';
     IonicModule,
     SearchPageRoutingModule
   ],
-  declarations: [SearchPage]
+  declarations: [SearchPage, EmptyMaintenanceComponent, FillMaintenanceComponent]
 })
-export class SearchPageModule {}
+export class SearchPageModule { }

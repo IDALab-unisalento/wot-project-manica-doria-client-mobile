@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -21,16 +21,11 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/maintenance-tab',
+        redirectTo: 'maintenance-tab',
         pathMatch: 'full'
       }
     ]
   },
-  {
-    path: '',
-    redirectTo: 'tabs/maintenance-tab',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

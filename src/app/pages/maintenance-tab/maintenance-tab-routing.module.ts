@@ -8,19 +8,19 @@ const routes: Routes = [
     path: '',
     component: MaintenanceTabPage,
     children: [
-        {
-          path: './search',
-          loadChildren: () => import('./children/search/search.module').then( m => m.SearchPageModule)
-        },
-        {
-          path: './step-list',
-          loadChildren: () => import('./children/step-list/step-list.module').then( m => m.StepListPageModule)
-        },
-        {
-          path: '',
-          redirectTo: './search',
-          pathMatch: 'full'
-        }]
+      {
+        path: 'search',
+        loadChildren: () => import('./children/search/search.module').then(m => m.SearchPageModule)
+      },
+      {
+        path: 'step-list',
+        loadChildren: () => import('./children/step-list/step-list.module').then(m => m.StepListPageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'search',
+        pathMatch: 'full'
+      }]
   },
   /*{
     path: '',
@@ -33,4 +33,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MaintenanceTabPageRoutingModule {}
+export class MaintenanceTabPageRoutingModule { }
