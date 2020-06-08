@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MaintenanceService} from '../../../../services/maintenance.service';
+import {Maintenance} from '../../../../models/maintenance';
 
 @Component({
   selector: 'app-search',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchPage implements OnInit {
 
-  constructor() { }
+  maintenance: Maintenance;
+
+  constructor(private maintenanceService: MaintenanceService) { }
 
   ngOnInit() {
+    this.getMaintenanceByStatusAndUser()
+  }
 
+  getMaintenanceByStatusAndUser() {
+    this.maintenanceService.getMaintenanceByStatusAndUser('started', '1').subscribe(data => {
+      console.log('Maintenance By Status And User: ', data);
+      this.maintenance = data;
+    });
   }
 
 }

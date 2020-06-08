@@ -15,11 +15,12 @@ const httpOptions = {
 })
 export class MaintenanceService {
 
-  private getAllMaintenanceByUserUrl = ApiVariables.apiUrlMaintenance + '/getMaintenaceFromUser/';
+  private getAllMaintenanceByUserUrl = ApiVariables.apiUrlMaintenance + '/getMaintenanceFromUser/';
   private getAllMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/getAll';
   private getMaintenanceByIdUrl = ApiVariables.apiUrlMaintenance + '/getById/';
   private saveMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/save';
   private deleteMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/delete/';
+  private getMaintenanceByStatusAndUserUrl = ApiVariables.apiUrlMaintenance + '/getMaintenanceByStatusAndUser/';
 
   constructor(private http: HttpClient) { }
 
@@ -42,5 +43,9 @@ export class MaintenanceService {
 
   deleteMaintenance(id: string): Observable<Maintenance> {
     return this.http.delete<Maintenance>(this.deleteMaintenanceUrl + id);
+  }
+
+  getMaintenanceByStatusAndUser(status: string, id: string): Observable<Maintenance> {
+    return this.http.get<Maintenance>(this.getMaintenanceByStatusAndUserUrl + status + '/' + id);
   }
 }
