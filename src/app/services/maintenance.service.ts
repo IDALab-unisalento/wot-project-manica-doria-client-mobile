@@ -20,7 +20,7 @@ export class MaintenanceService {
   private getMaintenanceByIdUrl = ApiVariables.apiUrlMaintenance + '/getById/';
   private saveMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/save';
   private deleteMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/delete/';
-  private getMaintenanceByStatusAndUserUrl = ApiVariables.apiUrlMaintenance + '/getMaintenanceByStatusAndUser/';
+  private getMaintenanceByStatusAndUserUrl = ApiVariables.apiUrlMaintenance + '/getByStatusAndUser/';
 
   constructor(private http: HttpClient) { }
 

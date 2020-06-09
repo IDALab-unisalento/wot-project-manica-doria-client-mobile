@@ -14,13 +14,17 @@ export class SearchPage implements OnInit {
   constructor(private maintenanceService: MaintenanceService) { }
 
   ngOnInit() {
-    this.getMaintenanceByStatusAndUser()
+    this.getMaintenanceByStatusAndUser();
   }
 
   getMaintenanceByStatusAndUser() {
     this.maintenanceService.getMaintenanceByStatusAndUser('started', '1').subscribe(data => {
       console.log('Maintenance By Status And User: ', data);
       this.maintenance = data;
+    }, err => {
+      console.log(err);
+      this.maintenance = null;
+      console.log(this.maintenance);
     });
   }
 

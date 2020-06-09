@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="true; then EmptyList else FillList"></div>
+  <div *ngIf="maintenance; then FillList else EmptyList"></div>
 </ion-content>
 
 <ng-template #EmptyList>

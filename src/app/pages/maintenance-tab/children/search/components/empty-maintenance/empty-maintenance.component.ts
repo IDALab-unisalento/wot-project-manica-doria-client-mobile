@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-empty-maintenance',
@@ -8,10 +9,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 export class EmptyMaintenanceComponent implements AfterViewInit {
   prefersDark: boolean;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngAfterViewInit(): void {
     this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
+  goMaintenaceList() {
+    this.router.navigate(['/tabs/maintenance-list-tab']);
+  }
 }
