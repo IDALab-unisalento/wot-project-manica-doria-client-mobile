@@ -1,8 +1,9 @@
 import { Step } from './../models/step';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { ApiVariables } from '../common/ApiVariables';
+import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,18 +29,36 @@ export class StepService {
   }
 
   getStepById(id: string): Observable<Step> {
-    return this.http.get<Step>(this.getStepByIdUrl + id);
+    return this.http.get<Step>(this.getStepByIdUrl + id).pipe(
+      catchError(this.handleError)
+    );
   }
 
   saveStep(step: Step): Observable<Step> {
-    return this.http.post<Step>(this.saveStepUrl, step, httpOptions);
+    return this.http.post<Step>(this.saveStepUrl, step, httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteStep(id: string): Observable<Step> {
-    return this.http.delete<Step>(this.deleteStepUrl + id);
+    return this.http.delete<Step>(this.deleteStepUrl + id).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getStepByMaintenanceId(id: number): Observable<Step[]> {
-    return this.http.get<Step[]>(this.getStepByMaintenanceIdUrl + id);
+    return this.http.get<Step[]>(this.getStepByMaintenanceIdUrl + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.error.status}\nMessage: ${error.error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }

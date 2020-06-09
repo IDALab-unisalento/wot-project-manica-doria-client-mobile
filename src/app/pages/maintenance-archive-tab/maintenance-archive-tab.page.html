@@ -1,13 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>maintenance-archive-tab</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar>
+  <ion-title>Lista Manutenzioni</ion-title>
+  <ion-avatar slot="end">
+    <ion-icon class="icon-profile" name="person-circle-outline"></ion-icon>
+  </ion-avatar>
+</ion-toolbar>
+
 
 <ion-content>
   <ion-card class="card grad-background">
     <ion-card-content>
-      <app-list></app-list>
+      <router-outlet></router-outlet>
     </ion-card-content>
   </ion-card>
 </ion-content>

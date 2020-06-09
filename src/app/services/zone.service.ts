@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { Zone } from '../models/zone';
 import { ApiVariables } from '../common/ApiVariables';
+import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,18 +26,36 @@ export class ZoneService {
   constructor(private http: HttpClient) { }
 
   getAllZone(): Observable<Zone[]> {
-    return this.http.get<Zone[]>(this.getAllZoneUrl);
+    return this.http.get<Zone[]>(this.getAllZoneUrl).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getZoneById(id: string): Observable<Zone> {
-    return this.http.get<Zone>(this.getZoneByIdUrl + id);
+    return this.http.get<Zone>(this.getZoneByIdUrl + id).pipe(
+      catchError(this.handleError)
+    );
   }
 
   saveZone(zone: Zone): Observable<Zone> {
-    return this.http.post<Zone>(this.saveZoneUrl, zone, httpOptions);
+    return this.http.post<Zone>(this.saveZoneUrl, zone, httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteZone(id: string): Observable<Zone> {
-    return this.http.delete<Zone>(this.deleteZoneUrl + id);
+    return this.http.delete<Zone>(this.deleteZoneUrl + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.error.status}\nMessage: ${error.error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }

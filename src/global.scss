@@ -29,6 +29,22 @@ ion-input, ion-item {
   --background:  trasparent !important;
 }
 
+ion-tab-bar, ion-toolbar {
+  padding: 10px 0px;
+  --border: none;
+}
+
 .grad-background {
   background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
 }
+
+.toast-danger {
+    --background: var(--danger-light);
+    --color: var(--light-dark);
+}
+
+.icon-profile{
+  font-size: 2.5rem;
+  padding: 5px 10px 5px 0;
+}
+

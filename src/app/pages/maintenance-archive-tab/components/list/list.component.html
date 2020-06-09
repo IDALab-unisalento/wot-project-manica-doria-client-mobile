@@ -1,5 +1,6 @@
 <ion-list>
-  <ion-item button *ngFor="let maintenance of maintenanceList" (click)="showDetails(maintenance)" lines="full">
+  <ion-item [hidden]="maintenance.status!='completed'" button *ngFor="let maintenance of maintenanceList"
+    (click)="showDetails(maintenance)" lines="none">
     <ion-label class="ion-text-wrap">
       <h2 class="warning-text"><b>{{maintenance.name}}</b></h2>
       <p class="light-text">{{maintenance.type}}</p>

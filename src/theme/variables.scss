@@ -132,11 +132,10 @@
     --ion-color-step-100: hsl(33, 10%, 91%);
     --ion-color-step-50: hsl(33, 10%, 95%);
 
-    --ion-item-background: --light-dark;
+    --ion-item-background: transparent;
 
-    --ion-toolbar-background: --light;
-
-    --ion-tab-bar-background: --light-dark;
+    --ion-toolbar-background: var(--light);
+    --ion-tab-bar-background: var(--light);
   }
 }
 
@@ -164,11 +163,11 @@
     --light: #afa69bff;
 
     /* DARKER */
-    --dark-darker: #121617;
-    --primary-darker: #1f565fff;
-    --danger-darker: #ba2106ff;
-    --warning-darer: #a96717ff;
-    --light-darker: #928677ff;
+    --dark-dark: #121617;
+    --primary-dark: #1f565fff;
+    --danger-dark: #ba2106ff;
+    --warning-dark: #a96717ff;
+    --light-dark: #928677ff;
     
     --ion-background-color: var(--dark);
     --ion-background-color-rgb: 23, 27, 28;
@@ -198,11 +197,11 @@
     --ion-color-step-900: hsl(197, 10%, 91%);
     --ion-color-step-950: hsl(197, 10%, 95%);
 
-    --ion-item-background: --dark;
+    --ion-item-background: transparent;
 
-    --ion-toolbar-background: --darker;
+    --ion-toolbar-background: var(--dark);
 
-    --ion-tab-bar-background: --darker;
+    --ion-tab-bar-background: var(--dark);
 
 
 

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserLogin } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { UtilisService } from 'src/app/services/utilis.service';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +14,10 @@ export class FormComponent implements OnInit {
 
   userLogin: UserLogin;
 
-  constructor(private loginService: LoginService, private router: Router) {
+
+
+
+  constructor(private utilsService: UtilisService, private loginService: LoginService, private router: Router) {
     this.userLogin = {
       email: '',
       password: ''
@@ -28,12 +33,17 @@ export class FormComponent implements OnInit {
       data => {
         console.log(data);
         this.router.navigate(['/tabs']);
+      },
+      error => {
+        this.utilsService.showToast({
+          header: 'Errore di autenticazione',
+          message: 'Controlla email e/o password',
+          position: 'top',
+          duration: 3000,
+          cssClass: 'toast-danger'
+        });
       }
     );
-  }
-
-  help(form: any) {
-    console.log(form);
   }
 
 }

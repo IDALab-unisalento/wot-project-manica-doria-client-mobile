@@ -1,17 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, AfterContentChecked } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-empty-maintenance',
   templateUrl: './empty-maintenance.component.html',
   styleUrls: ['./empty-maintenance.component.scss'],
 })
-export class EmptyMaintenanceComponent implements AfterViewInit {
-  prefersDark: boolean;
+export class EmptyMaintenanceComponent implements AfterContentChecked {
+  prefersDark = false;
 
   constructor(private router: Router) { }
 
-  ngAfterViewInit(): void {
+  ngAfterContentChecked(): void {
     this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 

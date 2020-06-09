@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, from, throwError } from 'rxjs';
 import { UserLogin } from '../models/user';
 import { User } from '../models/user';
 import { ApiVariables } from '../common/ApiVariables';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,22 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(user: UserLogin): Observable<User> {
-    return this.http.get<User>(this.loginUrl + `${user.email}/${user.password}`);
+    return this.http.get<User>(this.loginUrl + `${user.email}/${user.password}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      console.log(error);
+      errorMessage = `Error Code: ${error.error.status}\nMessage: ${error.error.message}`;
+    }
+    return throwError(errorMessage);
   }
 
 }

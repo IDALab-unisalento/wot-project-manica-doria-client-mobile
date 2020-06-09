@@ -1,3 +1,4 @@
+import { DetailsComponent } from './components/details/details.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,6 @@ import { ListComponent } from './components/list/list.component';
     IonicModule,
     MaintenanceListTabPageRoutingModule
   ],
-  declarations: [MaintenanceListTabPage, ListComponent]
+  declarations: [MaintenanceListTabPage, ListComponent, DetailsComponent]
 })
 export class MaintenanceListTabPageModule { }

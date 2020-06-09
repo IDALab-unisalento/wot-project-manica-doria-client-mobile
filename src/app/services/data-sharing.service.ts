@@ -20,5 +20,6 @@ export class DataSharingService {
   setCurrentMaintenance(maintenace: Maintenance): void {
     this.maintenace = maintenace;
   }
+
 }
 
