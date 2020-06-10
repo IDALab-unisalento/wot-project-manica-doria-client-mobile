@@ -3,6 +3,7 @@ import { MaintenanceService } from '../../../../services/maintenance.service';
 import { Maintenance } from '../../../../models/maintenance';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {StorageService} from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-list',
@@ -17,15 +18,12 @@ export class ListComponent implements OnInit {
     private maintenanceService: MaintenanceService,
     private datasharing: DataSharingService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
-    /*this.maintenanceService.getAllMaintenaceByUser().subscribe(data => {
-      console.log('Maintenance By User: ', data);
-      this.maintenanceList = data;
-    });*/
-    this.maintenanceService.getMaintenanceByStatusAndUser('in-progress', '1').subscribe(data => {
+    this.maintenanceService.getMaintenanceByStatusAndUser('in-progress', this.storageService.getId()).subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.maintenanceList = data;
     });

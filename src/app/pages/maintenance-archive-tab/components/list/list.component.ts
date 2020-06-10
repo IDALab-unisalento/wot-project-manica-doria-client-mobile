@@ -13,7 +13,6 @@ import {StorageService} from '../../../../services/storage.service';
 export class ListComponent implements OnInit {
 
   maintenanceList: Maintenance[];
-  id: string;
 
   constructor(
     private maintenanceService: MaintenanceService,
@@ -23,8 +22,7 @@ export class ListComponent implements OnInit {
     private storageService: StorageService) { }
 
   ngOnInit() {
-    this.id = this.storageService.getId();
-    this.maintenanceService.getMaintenanceByStatusAndUser('completed', this.id).subscribe(data => {
+    this.maintenanceService.getMaintenanceByStatusAndUser('completed', this.storageService.getId()).subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.maintenanceList = data;
     });
