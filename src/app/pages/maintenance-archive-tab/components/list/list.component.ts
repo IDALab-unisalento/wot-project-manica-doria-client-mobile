@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.maintenanceService.getAllMaintenaceByUser().subscribe(data => {
+    this.maintenanceService.getMaintenanceByStatusAndUser('completed', '1').subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.maintenanceList = data;
     });

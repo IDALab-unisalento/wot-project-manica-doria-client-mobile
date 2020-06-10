@@ -1,5 +1,6 @@
+<ion-label *ngIf="maintenanceList?.length == 0">Non ci sono manutenzioni assegnate</ion-label>
 <ion-list>
-    <ion-item [hidden]="maintenance.status!='in-progress'" button *ngFor="let maintenance of maintenanceList"
+    <ion-item button *ngFor="let maintenance of maintenanceList"
         (click)="showDetails(maintenance)" lines="none">
         <ion-label class="ion-text-wrap">
             <h2 class="warning-text"><b>{{maintenance.name}}</b></h2>

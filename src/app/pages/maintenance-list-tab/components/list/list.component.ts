@@ -21,7 +21,11 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.maintenanceService.getAllMaintenaceByUser().subscribe(data => {
+    /*this.maintenanceService.getAllMaintenaceByUser().subscribe(data => {
+      console.log('Maintenance By User: ', data);
+      this.maintenanceList = data;
+    });*/
+    this.maintenanceService.getMaintenanceByStatusAndUser('in-progress', '1').subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.maintenanceList = data;
     });

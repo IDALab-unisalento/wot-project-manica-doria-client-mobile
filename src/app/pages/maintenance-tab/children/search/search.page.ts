@@ -9,7 +9,7 @@ import { Maintenance } from '../../../../models/maintenance';
 })
 export class SearchPage implements OnInit {
 
-  maintenance: Maintenance;
+  maintenance: Maintenance[];
 
   constructor(private maintenanceService: MaintenanceService) { }
 

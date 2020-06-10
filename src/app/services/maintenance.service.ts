@@ -62,8 +62,8 @@ export class MaintenanceService {
       );
   }
 
-  getMaintenanceByStatusAndUser(status: string, id: string): Observable<Maintenance> {
-    return this.http.get<Maintenance>(this.getMaintenanceByStatusAndUserUrl + status + '/' + id)
+  getMaintenanceByStatusAndUser(status: string, id: string): Observable<Maintenance[]> {
+    return this.http.get<Maintenance[]>(this.getMaintenanceByStatusAndUserUrl + status + '/' + id)
       .pipe(
         catchError(this.handleError)
       );
