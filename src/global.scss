@@ -34,6 +34,10 @@ ion-tab-bar, ion-toolbar {
   --border: none;
 }
 
+ion-header {
+  --border: none;
+}
+
 .grad-background {
   background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
 }
