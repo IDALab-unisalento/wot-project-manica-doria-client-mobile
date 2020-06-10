@@ -18,6 +18,8 @@ import { MachineService } from './services/machine.service';
 import { StepService } from './services/step.service';
 import { ZoneService } from './services/zone.service';
 import { UserMaintenanceService } from './services/user-maintenance.service';
+import {LoginService} from './services/login.service';
+import {StorageService} from './services/storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +36,8 @@ import { UserMaintenanceService } from './services/user-maintenance.service';
     StepService,
     ZoneService,
     UserMaintenanceService,
+    LoginService,
+    StorageService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -21,6 +21,16 @@ export class LoginService {
     );
   }
 
+  setUser(user: User) {
+    localStorage.setItem('ID_KEY', String(user.id));
+    localStorage.setItem('EMAIL_KEY', user.email);
+    localStorage.setItem('ROLE_KEY', user.role);
+  }
+
+  getId() {
+    return localStorage.getItem('ID_KEY');
+  }
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

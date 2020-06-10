@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UtilisService } from 'src/app/services/utilis.service';
+import {StorageService} from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-form',
@@ -13,9 +14,6 @@ import { UtilisService } from 'src/app/services/utilis.service';
 export class FormComponent implements OnInit {
 
   userLogin: UserLogin;
-
-
-
 
   constructor(private utilsService: UtilisService, private loginService: LoginService, private router: Router) {
     this.userLogin = {
@@ -32,6 +30,7 @@ export class FormComponent implements OnInit {
     this.loginService.login(user).subscribe(
       data => {
         console.log(data);
+        this.loginService.setUser(data);
         this.router.navigate(['/tabs']);
       },
       error => {
