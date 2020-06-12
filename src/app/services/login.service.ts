@@ -4,8 +4,12 @@ import { Observable, from, throwError } from 'rxjs';
 import { UserLogin } from '../models/user';
 import { User } from '../models/user';
 import { ApiVariables } from '../common/ApiVariables';
+<<<<<<< Updated upstream
 import {catchError, map, tap} from 'rxjs/operators';
 import {StorageService} from './storage.service';
+=======
+import { catchError, map, tap } from 'rxjs/operators';
+>>>>>>> Stashed changes
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +22,11 @@ export class LoginService {
 
   login(user: UserLogin): Observable<User> {
     return this.http.get<User>(this.loginUrl + `${user.email}/${user.password}`).pipe(
+<<<<<<< Updated upstream
         tap( data =>  this.storageService.setUser(data)),
+=======
+      tap(data => console.log(data)),
+>>>>>>> Stashed changes
       catchError(this.handleError)
     );
   }

@@ -1,3 +1,9 @@
+<ion-row style="height: 24px; padding-top: 0;">
+  <ion-col style="padding: 0;" offset="11">
+    <ion-icon (click)="close()" class="icon-close" name="close-outline"></ion-icon>
+  </ion-col>
+</ion-row>
+
 <ion-item lines=none>
   <ion-list>
     <ion-label class="ion-text-wrap">
@@ -27,7 +33,9 @@
       <ion-label class="ion-text-wrap">
         <h2 class="light-text">{{step.name}}</h2>
         <h3>Duration: {{step.estimateDuration}}</h3>
-        <p class="light-text">{{step.description}}</p>
+        <a type="button" (click)="showDescription(step)"> Show More <ion-icon style="padding-top: 2px"
+            name="arrow-down-outline"></ion-icon></a>
+        <p class=" light-text" [hidden]="!step.description_visible">{{step.description}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

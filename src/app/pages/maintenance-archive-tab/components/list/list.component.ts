@@ -3,7 +3,7 @@ import { Maintenance } from '../../../../models/maintenance';
 import { MaintenanceService } from '../../../../services/maintenance.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {StorageService} from '../../../../services/storage.service';
+import { StorageService } from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-list',

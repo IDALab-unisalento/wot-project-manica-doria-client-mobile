@@ -1,3 +1,4 @@
+import { Router, ActivationEnd, ActivatedRoute } from '@angular/router';
 import { StepService } from './../../../../services/step.service';
 import { Maintenance } from './../../../../models/maintenance';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +15,13 @@ export class DetailsComponent implements OnInit {
   selectedMaintenance: Maintenance;
   steplist: Step[];
 
-  constructor(private dataSharing: DataSharingService, private stepService: StepService) { }
+  constructor(
+    private dataSharing: DataSharingService,
+    private stepService: StepService,
+    private router: Router,
+    private route: ActivatedRoute) { }
+
+  descriptionHidden = false;
 
   ngOnInit() {
     this.dataSharing.getCurrentMaintenance().subscribe(
@@ -24,6 +31,14 @@ export class DetailsComponent implements OnInit {
     this.stepService.getStepByMaintenanceId(this.selectedMaintenance.id).subscribe(
       data => this.steplist = data
     );
+  }
+
+  showDescription(step: Step) {
+    step.description_visible = !step.description_visible;
+  }
+
+  close() {
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
 }
