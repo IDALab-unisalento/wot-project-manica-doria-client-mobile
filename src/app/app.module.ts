@@ -20,11 +20,13 @@ import { ZoneService } from './services/zone.service';
 import { UserMaintenanceService } from './services/user-maintenance.service';
 import {LoginService} from './services/login.service';
 import {StorageService} from './services/storage.service';
+import {AuthGuardService} from './services/auth-guard.service';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -38,6 +40,7 @@ import {StorageService} from './services/storage.service';
     UserMaintenanceService,
     LoginService,
     StorageService,
+    AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -23,11 +23,17 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.maintenanceService.getMaintenanceByStatusAndUser('in-progress', this.storageService.getId()).subscribe(data => {
+    this.storageService.getId().then(data => {
+      this.getMaintenanceByStatusAndUser(data);
+    });
+  }
+
+  getMaintenanceByStatusAndUser(id: string) {
+    this.maintenanceService.getMaintenanceByStatusAndUser('in-progress', id).subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.maintenanceList = data;
     });
-  }
+  };
 
   showDetails(maintenance: Maintenance) {
     this.datasharing.setCurrentMaintenance(maintenance);

@@ -1,0 +1,27 @@
+.grad-background {
+  background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
+}
+
+@media(prefers-color-scheme: dark){
+
+  .light-text {
+    color: var(--light);
+  }
+  .warning-text {
+    color: var(--warning-light)
+  }
+}
+
+/*  ----------------
+         LIGHT
+    ---------------- */
+
+@media(prefers-color-scheme: light){
+
+  .light-text {
+    color: var(--dark);
+  }
+  .warning-text {
+    color: var(--warning-dark)
+  }
+}

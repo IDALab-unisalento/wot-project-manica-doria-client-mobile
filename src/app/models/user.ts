@@ -5,7 +5,7 @@ export interface User {
     role?: string;
     email?: string;
     password?: string;
-    serial_number?: string;
+    serialNumber?: string;
 }
 
 export interface UserLogin {

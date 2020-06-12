@@ -22,7 +22,13 @@ export class ListComponent implements OnInit {
     private storageService: StorageService) { }
 
   ngOnInit() {
-    this.maintenanceService.getMaintenanceByStatusAndUser('completed', this.storageService.getId()).subscribe(data => {
+    this.storageService.getId().then(data => {
+      this.getMaintenanceByStatusAndUser(data);
+    });
+  }
+
+  getMaintenanceByStatusAndUser(id: string) {
+    this.maintenanceService.getMaintenanceByStatusAndUser('completed', id).subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.maintenanceList = data;
     });
