@@ -29,12 +29,11 @@
 <ion-item lines=none>
   <ion-list>
     <h2 class="warning-text"><b>Steps</b></h2>
-    <ion-item *ngFor="let step of steplist">
+    <ion-item lines=none *ngFor="let step of steplist">
       <ion-label class="ion-text-wrap">
         <h2 class="light-text">{{step.name}}</h2>
         <h3>Duration: {{step.estimateDuration}}</h3>
-        <a type="button" (click)="showDescription(step)"> Show More <ion-icon style="padding-top: 2px"
-            name="arrow-down-outline"></ion-icon></a>
+        <a class="warning-text" type="button" (click)="showDescription(step)"> Show More...</a>
         <p class=" light-text" [hidden]="!step.description_visible">{{step.description}}</p>
       </ion-label>
     </ion-item>

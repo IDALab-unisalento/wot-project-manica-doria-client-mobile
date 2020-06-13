@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
     "@capacitor/core": "2.1.2",
+    "@ionic-native/ble": "^5.26.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/ibeacon": "^5.26.0",
     "@ionic-native/splash-screen": "^5.0.0",
@@ -75,9 +76,7 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-ble-central": {
-        "BLUETOOTH_USAGE_DESCRIPTION": " "
-      },
+      "cordova-plugin-ble-central": {},
       "com.unarin.cordova.beacon": {},
       "cordova-sqlite-storage": {}
     },

@@ -18,18 +18,27 @@ import { MachineService } from './services/machine.service';
 import { StepService } from './services/step.service';
 import { ZoneService } from './services/zone.service';
 import { UserMaintenanceService } from './services/user-maintenance.service';
-import {LoginService} from './services/login.service';
-import {StorageService} from './services/storage.service';
-import {AuthGuardService} from './services/auth-guard.service';
+import { LoginService } from './services/login.service';
+import { StorageService } from './services/storage.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { IonicStorageModule } from '@ionic/storage';
+import { BLE } from '@ionic-native/ble/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
+    BLE,
     MaintenanceService,
     UserService,
     AttachmentService,

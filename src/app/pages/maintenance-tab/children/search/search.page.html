@@ -1,11 +1,4 @@
 <ion-content>
-  <div *ngIf="maintenance?.length; then FillList else EmptyList"></div>
+  <app-search-card [title]='title' [subtitle]="subtitle" [maintenaceLength]='maintenanceLength' [beacon]='beacon'>
+  </app-search-card>
 </ion-content>
-
-<ng-template #EmptyList>
-  <app-empty-maintenance></app-empty-maintenance>
-</ng-template>
-
-<ng-template #FillList>
-  <app-fill-maintenance></app-fill-maintenance>
-</ng-template>

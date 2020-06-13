@@ -1,0 +1,14 @@
+ .submit-button, .logout-button {
+    min-height: 35px;
+    min-width: 150px;
+    padding-left: 15px;
+    padding-top: 15px;
+    @media (prefers-color-scheme: dark) {
+      --background: linear-gradient(to top right, var(--primary), var(--primary-light));
+      --background-activated: linear-gradient(to top right, var(--primary), var(--primary-dark));
+    }
+    @media (prefers-color-scheme: light) {
+      --background: linear-gradient(to bottom left, var(--warning), var(--warning-light));
+      --background-activated: linear-gradient(to top right, var(--warning), var(--warning-dark));
+    }
+ }

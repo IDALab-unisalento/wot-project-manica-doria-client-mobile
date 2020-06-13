@@ -42,6 +42,28 @@ ion-tab-bar {
   --border: none;
 }
 
+ion-tab-button {
+   @media (prefers-color-scheme: light) {
+    --color-selected: var(--warning-dark);
+  }
+   @media (prefers-color-scheme: dark) {
+    --color-selected: var(--primary-light);
+  }
+}
+
+.primary-button {
+    min-height: 50px;
+    min-width: 150px;
+    @media (prefers-color-scheme: dark) {
+      --background: linear-gradient(to top right, var(--primary), var(--primary-light));
+      --background-activated: linear-gradient(to top right, var(--primary), var(--primary-dark));
+    }
+    @media (prefers-color-scheme: light) {
+      --background: linear-gradient(to bottom left, var(--warning), var(--warning-light));
+      --background-activated: linear-gradient(to top right, var(--warning), var(--warning-dark));
+    }
+}
+
 
 .grad-background {
   background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
@@ -49,7 +71,7 @@ ion-tab-bar {
 
 .toast-danger {
     --background: var(--danger-light);
-    --color: var(--light);
+    --color: var(--light-light);
 }
 
 .icon-profile{

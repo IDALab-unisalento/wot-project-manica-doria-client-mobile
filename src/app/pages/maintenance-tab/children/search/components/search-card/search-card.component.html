@@ -1,0 +1,30 @@
+<ion-card class="card grad-background">
+  <ion-card-header style="text-align: center">
+    <ion-card-subtitle>{{subtitle}}</ion-card-subtitle>
+    <ion-card-title>{{title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-row>
+      <ion-col offset="4">
+        <ion-icon style="font-size: 100px;" name="build"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col offset="3" size="6">
+        <div *ngIf="maintenaceLength; then thenBlock else elseBlock"></div>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+<ng-template #thenBlock>
+  <ion-button [disabled]="!enable" class="primary-button" (click)="goAvvia()">Avvia</ion-button>
+</ng-template>
+<ng-template #elseBlock>
+  <ion-button class=" primary-button" (click)="goMaintenaceList()">Lista<br>Manutenzioni</ion-button>
+</ng-template>
+
+<!-- <ion-col size="6">
+  <div *ngIf="maintenaceLength; then thenBlock else elseBlock"></div>
+</ion-col> -->
