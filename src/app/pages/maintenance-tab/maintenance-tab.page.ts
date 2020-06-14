@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-maintenance-tab',
@@ -8,12 +7,9 @@ import {Router} from '@angular/router';
 })
 export class MaintenanceTabPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  goToProfile() {
-    this.router.navigate(['/profile']);
-  }
 }

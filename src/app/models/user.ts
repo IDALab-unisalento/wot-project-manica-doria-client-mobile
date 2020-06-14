@@ -5,6 +5,7 @@ export interface User {
     role?: string;
     email?: string;
     password?: string;
+    passwordVerify?: string;
     serialNumber?: string;
 }
 

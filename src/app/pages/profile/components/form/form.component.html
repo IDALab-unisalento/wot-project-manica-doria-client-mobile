@@ -1,42 +1,63 @@
-<ion-item lines=none>
-    <ion-list>
-        <ion-label class="ion-text-wrap">
-            <h2 class="light-text"><b>Nome: {{user.name}}</b></h2>
-            <h2 class="light-text">Cognome: <b>{{user.surname}}</b></h2>
-            <h2 class="light-text">Email: <b>{{user.email}}</b></h2>
-        </ion-label>
-    </ion-list>
-</ion-item>
+<ion-list>
+    <ion-list-header>
+        Scheda Personale
+    </ion-list-header>
 
-<hr>
-
-<ion-item lines=none>
-    <ion-list>
-        <ion-label class="ion-text-wrap">
-            <h2 class="light-text"><b>Ruolo: {{user.role}}</b></h2>
-            <h3 class="light-text">N° Serie: <b>{{user.serialNumber}}</b></h3>
+    <ion-item lines=none>
+        <ion-label>
+            <h2 class="light-text">Nome: {{user.name}}</h2>
+            <h2 class="light-text">Cognome: {{user.surname}}</h2>
+            <h2 class="light-text">Email: {{user.email}}</h2>
         </ion-label>
-    </ion-list>
-</ion-item>
+    </ion-item>
+
+    <ion-item lines=none>
+        <ion-label>
+            <h2 class="light-text">Ruolo: {{user.role}}</h2>
+            <h2 class="light-text">Numero Identificativo: {{user.serialNumber}}</h2>
+        </ion-label>
+    </ion-item>
+
+
+
+</ion-list>
 
 <hr>
 <form>
+    <ion-list>
+        <ion-list-header>
+            Cambia Password
+        </ion-list-header>
+
     <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" class="form-control" [(ngModel)]="userLogin.password" name="password"
+        <ion-input type="password" class="form-control" [(ngModel)]="password" name="password"
             #loginPassword='ngModel' [ngClass]="{'is-invalid' : !(loginPassword.valid || !loginPassword.dirty)}"
             required minlength=5>
         </ion-input>
     </ion-item>
 
+    <div class="invalid-feedback" [hidden]="!loginPassword.errors?.minlength">
+        Aggiungi altri {{loginPassword.errors?.minlength?.requiredLength - loginPassword.errors?.minlength?.actualLength}}
+        caratteri
+    </div>
+
     <ion-item>
         <ion-label position="floating">Password Verify</ion-label>
-        <ion-input type="password" class="form-control" [(ngModel)]="userLogin.password" name="passwordVerify"
-            #loginPasswordVerify='ngModel' [ngClass]="{'is-invalid' : !(loginPassword.valid || !loginPassword.dirty)}"
+        <ion-input type="password" class="form-control" [(ngModel)]="passwordVerify" name="passwordVerify"
+            #loginPasswordVerify='ngModel' [ngClass]="{'is-invalid' : !(loginPasswordVerify.valid || !loginPasswordVerify.dirty)}"
             required minlength=5>
         </ion-input>
     </ion-item>
-    <ion-button class="submit-button" (click)="cambiaPassword()">Cambia
+
+    <div class="invalid-feedback" [hidden]="!loginPasswordVerify.errors?.minlength">
+        Aggiungi altri {{loginPasswordVerify.errors?.minlength?.requiredLength - loginPasswordVerify.errors?.minlength?.actualLength}}
+        caratteri
+    </div>
+
+    </ion-list>
+
+    <ion-button class="submit-button" (click)="cambiaPassword()" [disabled]="!loginPassword.valid && !loginPasswordVerify.valid">Cambia
         Password
     </ion-button>
 </form>

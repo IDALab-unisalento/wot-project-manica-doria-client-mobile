@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MaintenanceTabPageRoutingModule } from './maintenance-tab-routing.module';
 
 import { MaintenanceTabPage } from './maintenance-tab.page';
+import {IconProfileComponent} from '../common/icon-profile/icon-profile.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { MaintenanceTabPage } from './maintenance-tab.page';
     IonicModule,
     MaintenanceTabPageRoutingModule
   ],
-  declarations: [MaintenanceTabPage]
+  exports: [
+    IconProfileComponent
+  ],
+  declarations: [MaintenanceTabPage, IconProfileComponent]
 })
 export class MaintenanceTabPageModule {}

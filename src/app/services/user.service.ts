@@ -21,6 +21,7 @@ export class UserService {
   private getUserByIdUrl = ApiVariables.apiUrlUser + '/getById/';
   private saveUserUrl = ApiVariables.apiUrlUser + '/save';
   private deleteUserUrl = ApiVariables.apiUrlUser + '/delete/';
+  private updateUserUrl = ApiVariables.apiUrlUser + '/update';
 
   constructor(private http: HttpClient) { }
 
@@ -45,6 +46,12 @@ export class UserService {
   deleteUser(id: string): Observable<User> {
     return this.http.delete<User>(this.deleteUserUrl + id).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  cambiaPassword(user: User): Observable<User>{
+    return this.http.put<User>(this.updateUserUrl, user, httpOptions).pipe(
+        catchError(this.handleError)
     );
   }
 
