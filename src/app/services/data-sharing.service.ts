@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { Maintenance } from './../models/maintenance';
 import { Injectable } from '@angular/core';
+import {Step} from '../models/step';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Injectable } from '@angular/core';
 export class DataSharingService {
 
   private maintenace: Maintenance;
+  private step: Step;
 
   constructor() { }
 
@@ -20,6 +22,17 @@ export class DataSharingService {
   setCurrentMaintenance(maintenace: Maintenance): void {
     this.maintenace = maintenace;
   }
+
+  getCurrentStep(): Observable<Step> {
+    return new Observable(observer => {
+      observer.next(this.step);
+    });
+  }
+
+  setCurrentStep(step: Step): void {
+    this.step = step;
+  }
+
 
 }
 

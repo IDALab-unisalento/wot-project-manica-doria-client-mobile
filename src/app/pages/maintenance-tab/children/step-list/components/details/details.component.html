@@ -1,0 +1,29 @@
+<ion-row style="height: 24px; padding-top: 0;">
+  <ion-col style="padding: 0;" offset="11">
+    <ion-icon (click)="close()" class="icon-close" name="close-outline"></ion-icon>
+  </ion-col>
+</ion-row>
+
+<ion-list>
+  <ion-list-header>
+    Dettaglio {{selectedStep.name}}
+  </ion-list-header>
+
+  <ion-item lines=none>
+    <ion-label>
+      <h2 class="light-text">Descrizione: {{selectedStep.description}}</h2>
+      <h2 class="light-text">Durata stimata: {{selectedStep.estimateDuration}}</h2>
+      <h2 *ngIf="selectedStep.status == 'completed'" class="light-text">Durata effettiva: {{selectedStep.duration}}</h2>
+      <h2 class="light-text">Attachment: </h2>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)="completeStep()">Completa</ion-button>
+
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='startTimer()'>Start Timer</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='pauseTimer()'>Pause</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='clearTimer()'>Stop</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='getTime()'>Get Time</ion-button>
+
+<p>Tempo trascorso: {{time}} secondi</p>

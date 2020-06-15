@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { BleService } from 'src/app/services/ble.service';
 import { UtilisService } from 'src/app/services/utilis.service';
+import {DataSharingService} from '../../../../../../services/data-sharing.service';
 
 @Component({
   selector: 'app-search-card',
@@ -12,16 +13,20 @@ import { UtilisService } from 'src/app/services/utilis.service';
 export class SearchCardComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
-  @Input() maintenaceLength: number;
+  @Input() maintenanceLength: number;
   @Input() beacon: Beacon;
 
   found: boolean;
   enable: boolean;
 
-  constructor(private utils: UtilisService, private bleService: BleService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private utils: UtilisService,
+              private bleService: BleService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private dataSharing: DataSharingService) { }
 
   ngOnInit() {
-    if (this.maintenaceLength !== 0) {
+    if (this.maintenanceLength !== 0) {
       console.log('Sto cercando questo');
       console.log(this.beacon);
       this.bleService.findBeacon(this.beacon.name, this.beacon.mac).subscribe(
@@ -33,7 +38,7 @@ export class SearchCardComponent implements OnInit {
             position: 'top',
             cssClass: 'toast-danger'
           });
-          console.log("Sono fuori ma non è partito il popup");
+          console.log('Sono fuori ma non è partito il popup');
 
           this.enable = true;
         });

@@ -9,6 +9,7 @@ export interface Step {
     description_visible?: boolean;
     duration: number;
     estimateDuration: number;
+    status: string;
     attachmentList: Attachment[];
     zone: Zone;
 }

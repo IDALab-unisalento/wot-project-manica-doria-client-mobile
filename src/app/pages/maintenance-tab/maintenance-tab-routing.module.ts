@@ -23,6 +23,10 @@ const routes: Routes = [
       }]
   },
   /*{
+    path: 'step-list',
+    loadChildren: () => import('./children/step-list/step-list.module').then(m => m.StepListPageModule)
+  },*/
+  /*{
     path: '',
     redirectTo: 'aa/search',
     pathMatch: 'full'

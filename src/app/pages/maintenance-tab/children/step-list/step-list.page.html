@@ -1,13 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista degli Step</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button class="warning-text" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-avatar>
-        <ion-icon size='large' name="earth-outline"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h3>Ciao sono mimmo</h3>
-        <p>Sono un ingengere informatico</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card class="card grad-background">
+    <ion-card-content>
+
+      <router-outlet></router-outlet>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

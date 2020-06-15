@@ -23,6 +23,7 @@ import { StorageService } from './services/storage.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { BLE } from '@ionic-native/ble/ngx';
+import {TimerService} from './services/timer.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -50,6 +51,7 @@ import { BLE } from '@ionic-native/ble/ngx';
     LoginService,
     StorageService,
     AuthGuardService,
+    TimerService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

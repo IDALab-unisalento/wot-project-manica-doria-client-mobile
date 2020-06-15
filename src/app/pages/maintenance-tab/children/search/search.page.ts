@@ -19,8 +19,8 @@ export class SearchPage implements OnInit {
   maintenanceLength: number;
   beacon = {
     id: 1,
-    name: 'BlueUp-01-014565',
-    mac: '0EF84234-21FB-D572-2A00-410563C6A219'
+    name: 'BlueUp-01-014571',
+    mac: 'CC1A8B09-A69E-0204-E18F-F2CCC5E24A3B'
   };
 
   constructor(private maintenanceService: MaintenanceService, private storageService: StorageService) { }

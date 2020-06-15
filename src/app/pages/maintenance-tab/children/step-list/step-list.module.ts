@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { StepListPageRoutingModule } from './step-list-routing.module';
 
 import { StepListPage } from './step-list.page';
+import {ListComponent} from './components/list/list.component';
+import {DetailsComponent} from './components/details/details.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { StepListPage } from './step-list.page';
     IonicModule,
     StepListPageRoutingModule
   ],
-  declarations: [StepListPage]
+  declarations: [StepListPage, ListComponent, DetailsComponent]
 })
 export class StepListPageModule {}

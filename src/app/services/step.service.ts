@@ -21,6 +21,7 @@ export class StepService {
   private getStepByMaintenanceIdUrl = ApiVariables.apiUrlStep + '/getByMaintenanceId/';
   private saveStepUrl = ApiVariables.apiUrlStep + '/save';
   private deleteStepUrl = ApiVariables.apiUrlStep + '/delete/';
+  private completeStepUrl = ApiVariables.apiUrlStep + '/complete/';
 
   constructor(private http: HttpClient) { }
 
@@ -50,6 +51,13 @@ export class StepService {
     return this.http.get<Step[]>(this.getStepByMaintenanceIdUrl + id).pipe(
       catchError(this.handleError)
     );
+  }
+
+  completeStep(duration: number, idStep: number, idMaintenance: number): Observable<Step> {
+    return this.http.put<Step>(this.completeStepUrl + duration + '/' + idStep + '/' + idMaintenance,  httpOptions)
+        .pipe(
+            catchError(this.handleError)
+        );
   }
 
   handleError(error: HttpErrorResponse) {
