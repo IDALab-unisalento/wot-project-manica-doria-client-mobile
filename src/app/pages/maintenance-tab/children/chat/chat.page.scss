@@ -1,0 +1,53 @@
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 4px;
+  white-space: pre-wrap;
+}
+
+.my-message {
+    @media (prefers-color-scheme: dark) {
+        background: linear-gradient(to bottom, var(--primary),var(--primary-dark));
+        color: var(--light-light);
+    }
+    @media (prefers-color-scheme: light) {
+        background: linear-gradient(to bottom, var(--warning),var(--warning-dark));
+        color: var(--light-light);
+    }
+  
+}
+
+.other-message {
+    @media (prefers-color-scheme: dark) {
+        background: linear-gradient(to bottom, var(--ion-color-step-200),var(--ion-color-step-250));
+        color: var(--light-light);
+    }
+    @media (prefers-color-scheme: light) {
+        background: linear-gradient(to bottom, var(--ion-color-step-500),var(--ion-color-step-550));
+        color: var(--light-light);
+    }
+
+}
+
+.time {
+  color: #dfdfdf;
+  float: right;
+  font-size:  small;
+}
+
+.message-input {
+  margin-top: 0px;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 10px;
+  color: var(--light-light);
+}
+
+.msg-btn {
+  --padding-start: 0.5em;
+  --padding-end: 0.5em;
+}
+
+.send-btn {
+  color: var(--light-light)
+}
+

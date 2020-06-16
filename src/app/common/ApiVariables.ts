@@ -1,5 +1,5 @@
 export class ApiVariables {
-    public static localhost = '192.168.1.127:8080';
+    public static localhost = '192.168.1.7:8080';
 
     public static apiUrlUser = 'http://' + ApiVariables.localhost + '/api/user';
     public static apiUrlAttachment = 'http://' + ApiVariables.localhost + '/api/attachment';
@@ -9,4 +9,5 @@ export class ApiVariables {
     public static apiUrlStep = 'http://' + ApiVariables.localhost + '/api/step';
     public static apiUrlUserMaintenance = 'http://' + ApiVariables.localhost + '/api/user/maintenace/';
     public static apiUrlZone = 'http://' + ApiVariables.localhost + '/api/zone';
+    public static apiUrlChat = 'http://' + ApiVariables.localhost + '/api/chat';
 }

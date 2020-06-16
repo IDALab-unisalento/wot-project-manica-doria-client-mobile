@@ -17,8 +17,12 @@ const routes: Routes = [
         loadChildren: () => import('./children/step-list/step-list.module').then(m => m.StepListPageModule)
       },
       {
+        path: 'chat',
+        loadChildren: () => import('./children/chat/chat.module').then(m => m.ChatPageModule)
+      },
+      {
         path: '',
-        redirectTo: 'search',
+        redirectTo: 'chat',
         pathMatch: 'full'
       }]
   },
