@@ -14,7 +14,6 @@
         background: linear-gradient(to bottom, var(--warning),var(--warning-dark));
         color: var(--light-light);
     }
-  
 }
 
 .other-message {
@@ -39,7 +38,12 @@
   margin-top: 0px;
   border: 1px solid var(--ion-color-medium);
   border-radius: 10px;
-  color: var(--light-light);
+  @media (prefers-color-scheme: dark) {
+        color: var(--light-light);
+  }
+    @media (prefers-color-scheme: light) {
+        color: var(--dark-dark);
+  }
 }
 
 .msg-btn {
@@ -48,6 +52,44 @@
 }
 
 .send-btn {
-  color: var(--light-light)
+ @media (prefers-color-scheme: dark) {
+        color: var(--light-light);
+    }
+    @media (prefers-color-scheme: light) {
+        color: var(--dark-dark);
+    }
 }
+
+.input-msg {
+
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+   @media (prefers-color-scheme: dark) {
+        background: var(--dark);
+        color: var(--light-light);
+    }
+    @media (prefers-color-scheme: light) {
+        background: var(--light);
+        color: var(--dark-dark);
+    }
+
+}
+
+ion-toolbar{
+ padding-top: 0;
+ padding-bottom: 5px;
+}
+
+
+.text-color{
+   @media (prefers-color-scheme: dark) {
+     color: var(--primary-light);
+    }
+    @media (prefers-color-scheme: light) {
+      color: var(--warning-dark);
+    }
+}
+
 

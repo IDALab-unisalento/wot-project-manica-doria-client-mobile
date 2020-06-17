@@ -17,24 +17,11 @@ const routes: Routes = [
         loadChildren: () => import('./children/step-list/step-list.module').then(m => m.StepListPageModule)
       },
       {
-        path: 'chat',
-        loadChildren: () => import('./children/chat/chat.module').then(m => m.ChatPageModule)
-      },
-      {
         path: '',
-        redirectTo: 'chat',
+        redirectTo: 'search',
         pathMatch: 'full'
       }]
   },
-  /*{
-    path: 'step-list',
-    loadChildren: () => import('./children/step-list/step-list.module').then(m => m.StepListPageModule)
-  },*/
-  /*{
-    path: '',
-    redirectTo: 'aa/search',
-    pathMatch: 'full'
-  }*/
 ];
 
 @NgModule({

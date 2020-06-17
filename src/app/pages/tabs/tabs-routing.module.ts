@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../maintenance-archive-tab/maintenance-archive-tab.module').then(m => m.MaintenanceArchiveTabPageModule)
       },
       {
+        path: 'chat',
+        loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule),
+      },
+      {
         path: '',
         redirectTo: 'maintenance-tab',
         pathMatch: 'full'

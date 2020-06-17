@@ -9,16 +9,18 @@ import { MaintenanceArchiveTabPageRoutingModule } from './maintenance-archive-ta
 import { MaintenanceArchiveTabPage } from './maintenance-archive-tab.page';
 import { ListComponent } from './components/list/list.component';
 import { DetailsComponent } from './components/details/details.component';
-import {MaintenanceTabPageModule} from '../maintenance-tab/maintenance-tab.module';
+import { MaintenanceTabPageModule } from '../maintenance-tab/maintenance-tab.module';
+import { SharedComponentModule } from '../shared/shared.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MaintenanceArchiveTabPageRoutingModule,
-        MaintenanceTabPageModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SharedComponentModule,
+    MaintenanceArchiveTabPageRoutingModule,
+    MaintenanceTabPageModule
+  ],
   declarations: [MaintenanceArchiveTabPage, ListComponent, DetailsComponent]
 })
 export class MaintenanceArchiveTabPageModule { }

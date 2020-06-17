@@ -9,16 +9,18 @@ import { MaintenanceListTabPageRoutingModule } from './maintenance-list-tab-rout
 
 import { MaintenanceListTabPage } from './maintenance-list-tab.page';
 import { ListComponent } from './components/list/list.component';
-import {MaintenanceTabPageModule} from '../maintenance-tab/maintenance-tab.module';
+import { MaintenanceTabPageModule } from '../maintenance-tab/maintenance-tab.module';
+import { SharedComponentModule } from '../shared/shared.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        MaintenanceListTabPageRoutingModule,
-        MaintenanceTabPageModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MaintenanceListTabPageRoutingModule,
+    MaintenanceTabPageModule,
+    SharedComponentModule
+  ],
   declarations: [MaintenanceListTabPage, ListComponent, DetailsComponent]
 })
 export class MaintenanceListTabPageModule { }

@@ -1,4 +1,3 @@
-import { IconProfileComponent } from './../../../common/icon-profile/icon-profile.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ChatPageRoutingModule } from './chat-routing.module';
 
 import { ChatPage } from './chat.page';
+import { SharedComponentModule } from '../shared/shared.module';
+
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ChatPage } from './chat.page';
     FormsModule,
     IonicModule,
     ChatPageRoutingModule,
+    SharedComponentModule
 
   ],
   declarations: [ChatPage]

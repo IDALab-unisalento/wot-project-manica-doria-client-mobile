@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -25,16 +26,19 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BLE } from '@ionic-native/ble/ngx';
 import { TimerService } from './services/timer.service';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
+  exports: [],
   imports: [
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

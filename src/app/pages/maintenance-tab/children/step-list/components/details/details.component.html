@@ -19,11 +19,13 @@
   </ion-item>
 </ion-list>
 
-<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)="completeStep()">Completa</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)="completeStep()">Completa
+</ion-button>
 
-<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='startTimer()'>Start Timer</ion-button>
-<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='pauseTimer()'>Pause</ion-button>
-<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='clearTimer()'>Stop</ion-button>
-<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button"  (click)='getTime()'>Get Time</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='startTimer()'>Start Timer
+</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='pauseTimer()'>Pause</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='clearTimer()'>Stop</ion-button>
+<ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='getTime()'>Get Time</ion-button>
 
 <p>Tempo trascorso: {{time}} secondi</p>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {User} from '../models/user';
-import {BehaviorSubject} from 'rxjs';
-import {Router} from '@angular/router';
-import {Platform} from '@ionic/angular';
+import { User } from '../models/user';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class StorageService {
 
   authState = new BehaviorSubject(false);
 
-  constructor(private storage: Storage,  private router: Router,  private platform: Platform) {
+  constructor(private storage: Storage, private router: Router, private platform: Platform) {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
     });
@@ -45,6 +45,7 @@ export class StorageService {
 
 
   async setUser(user: User) {
+    console.log("sono qui")
     await this.storage.set('id', String(user.id));
     await this.storage.set('role', String(user.role));
     await this.storage.set('email', String(user.email));

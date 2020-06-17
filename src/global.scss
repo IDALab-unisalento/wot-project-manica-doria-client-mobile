@@ -25,6 +25,13 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+
+/* 
+---------------------------------------- 
+          Component Custom
+----------------------------------------
+*/
+
 ion-input, ion-item {
   --background:  trasparent !important;
 }
@@ -51,6 +58,12 @@ ion-tab-button {
   }
 }
 
+/* 
+---------------------------------------- 
+            Custom Button
+----------------------------------------
+*/
+
 .primary-button {
     min-height: 50px;
     min-width: 150px;
@@ -64,24 +77,54 @@ ion-tab-button {
     }
 }
 
+/* 
+---------------------------------------- 
+            Backcground
+----------------------------------------
+*/
+
 
 .grad-background {
   background: linear-gradient(to bottom, var(--ion-color-step-150),var(--ion-color-step-250));
 }
 
-.toast-danger {
-    --background: var(--danger-light);
-    --color: var(--light-light);
-}
+/* 
+---------------------------------------- 
+            Icon Custom
+----------------------------------------
+*/
 
-.icon-profile{
-  font-size: 2.5rem;
+.icon-toolbar{
+  font-size: 2.3rem;
   padding: 5px 10px 5px 0;
+   @media (prefers-color-scheme: dark) {
+     color: var(--primary-light);
+    }
+    @media (prefers-color-scheme: light) {
+      color: var(--warning-dark);
+    }
 }
 
 .icon-close{
   font-size: 1.5rem;
   padding: 5px 10px 5px 0;
   text-align: right;
+}
+
+
+/* 
+---------------------------------------- 
+            Toast Message
+----------------------------------------
+*/
+
+.toast-danger {
+    --background: var(--danger-light);
+    --color: var(--light-light);
+}
+
+.toast-success {
+    --background: var(--ion-color-success);
+    --color: var(--dark-dark);
 }
 

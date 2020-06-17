@@ -12,8 +12,7 @@ import { StorageService } from '../../../../services/storage.service';
 export class SearchPage implements OnInit {
   title: string;
   subtitle: string;
-
-  // @Output() showMenu: EventEmitter<boolean>;
+  titleToolbar = 'Ricerca Beacon';
 
   maintenance: Maintenance[];
   maintenanceLength: number;

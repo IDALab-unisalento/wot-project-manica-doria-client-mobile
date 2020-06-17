@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./maintenance-archive-tab.page.scss'],
 })
 export class MaintenanceArchiveTabPage implements OnInit {
-
+  title = 'Archivio Manutenzioni';
   constructor() { }
 
   ngOnInit() {

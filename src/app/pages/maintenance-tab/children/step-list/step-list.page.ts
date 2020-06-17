@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./step-list.page.scss'],
 })
 export class StepListPage implements OnInit {
-
+  title = 'Passaggi Manutenzione';
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,49 @@
+<ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button class="text-color" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button routerLink='/profile'>
+            <ion-icon class="icon-toolbar" name="person-circle"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+
+    <ion-title>Chat</ion-title>
+</ion-toolbar>
+
+<ion-content>
+    <ion-grid>
+        <ion-row *ngFor="let message of messages; index as i">
+            <ion-col [ngClass]="{'last-msg' : i == messages.length-1 }" size="9"
+                *ngIf="message.user.email !== this.user.email" class="message other-message">
+                <b>{{message.user.email}}</b><br>
+                <span>{{message.content}}</span>
+                <div class="time ion-text-right ion-text-capitalize"><br>{{message.date | date:'short'}}</div>
+            </ion-col>
+
+            <ion-col [ngClass]="{'last-msg' : i == messages.length-1 }" size="9" offset="3"
+                *ngIf="message.user.email ===  this.user.email" class="message my-message">
+                <b>{{message.user.email}}</b><br>
+                <span>{{message.content}}</span>
+                <div class="time ion-text-right ion-text-capitalize"><br>{{message.date | date:'short'}}</div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-item lines=none>
+            <ion-col size="10">
+                <ion-textarea auto-grow class="message-input" rows="1" #content>
+                </ion-textarea>
+            </ion-col>
+            <ion-col size="2">
+                <ion-button expand="block" fill="clear" color="primary" [disabled]="content.value === ''"
+                    class="msg-btn" (click)="sendMessage(content)">
+                    <ion-icon class="send-btn" name="send" slot="icon-only"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-item>
+    </ion-toolbar>
+</ion-footer>

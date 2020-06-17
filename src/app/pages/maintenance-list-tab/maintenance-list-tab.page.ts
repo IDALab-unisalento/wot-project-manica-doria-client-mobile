@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-maintenance-list-tab',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./maintenance-list-tab.page.scss'],
 })
 export class MaintenanceListTabPage implements OnInit {
+
+  @Input() title = 'Lista Manutenzioni';
 
   constructor() { }
 

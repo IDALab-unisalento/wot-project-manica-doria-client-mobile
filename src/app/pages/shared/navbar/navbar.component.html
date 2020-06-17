@@ -1,0 +1,14 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button (click)="goTo('/chat')">
+      <ion-icon class="icon-toolbar" name="chatbubbles-sharp"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button (click)="goTo('/profile')">
+      <ion-icon class="icon-toolbar" name="person-circle"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  <ion-title>{{title}}</ion-title>
+</ion-toolbar>

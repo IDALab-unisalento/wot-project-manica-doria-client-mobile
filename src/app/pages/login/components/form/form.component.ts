@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserLogin } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UtilisService } from 'src/app/services/utilis.service';
-import {StorageService} from '../../../../services/storage.service';
+import { StorageService } from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +15,12 @@ export class FormComponent implements OnInit {
 
   userLogin: UserLogin;
 
-  constructor(private utilsService: UtilisService, private loginService: LoginService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private utilsService: UtilisService,
+    private loginService: LoginService,
+    private router: Router,
+    private route: ActivatedRoute) {
+
     this.userLogin = {
       email: '',
       password: ''
@@ -30,7 +35,7 @@ export class FormComponent implements OnInit {
     this.loginService.login(user).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/tabs'], {relativeTo: this.route.parent});
+        this.router.navigate(['/tabs'], { relativeTo: this.route.parent });
       },
       error => {
         this.utilsService.showToast({
