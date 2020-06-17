@@ -22,6 +22,7 @@ export class ZoneService {
   private getZoneByIdUrl = ApiVariables.apiUrlZone + '/getById/';
   private saveZoneUrl = ApiVariables.apiUrlZone + '/save';
   private deleteZoneUrl = ApiVariables.apiUrlZone + '/delete/';
+  private getAllZoneByMachineUrl = ApiVariables.apiUrlZone + '/getAllByMachineId/';
 
   constructor(private http: HttpClient) { }
 
@@ -46,6 +47,12 @@ export class ZoneService {
   deleteZone(id: string): Observable<Zone> {
     return this.http.delete<Zone>(this.deleteZoneUrl + id).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  getAllZoneByMachineId(id: number): Observable<Zone[]> {
+    return this.http.get<Zone[]>(this.getAllZoneByMachineUrl + id).pipe(
+        catchError(this.handleError)
     );
   }
 

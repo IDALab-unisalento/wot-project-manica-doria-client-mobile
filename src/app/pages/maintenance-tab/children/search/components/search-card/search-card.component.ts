@@ -20,13 +20,13 @@ export class SearchCardComponent implements OnInit {
   enable: boolean;
 
   constructor(private utils: UtilisService,
-    private bleService: BleService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private dataSharing: DataSharingService) { }
+              private bleService: BleService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private dataSharing: DataSharingService) { }
 
   ngOnInit() {
-    if (this.maintenanceLength !== 0) {
+    /*if (this.maintenanceLength !== 0) {
       this.bleService.findBeacon(this.beacon.name, this.beacon.mac).subscribe(
         device => {
           this.utils.showToast({
@@ -38,7 +38,7 @@ export class SearchCardComponent implements OnInit {
           });
           this.enable = true;
         });
-    }
+    }*/
   }
 
   goMaintenaceList() {
