@@ -84,7 +84,7 @@ export class SearchPage implements OnInit {
         if (this.maintenanceLength !== 0) {
             console.log('Sto cercando questo');
             console.log(this.beacon);
-            await this.bleService.findBeacon().subscribe(device => {
+            /*await this.bleService.findBeacon().subscribe(device => {
                 if (device.name === this.beacon.name || device.id === this.beacon.mac) {
                     if (device.rssi > -80) {
                         console.log('Stopped perchè trovato');
@@ -94,7 +94,7 @@ export class SearchPage implements OnInit {
                         //return device;
                     }
                 }
-            });
+            });*/
         }
         console.log('Enable dopo', this.enable);
     }

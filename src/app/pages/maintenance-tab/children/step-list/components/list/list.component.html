@@ -1,3 +1,9 @@
+<ion-row style="height: 24px; padding-top: 0;">
+  <ion-col style="padding: 0;" offset="11">
+    <ion-icon (click)="close()" class="icon-close" name="close-outline"></ion-icon>
+  </ion-col>
+</ion-row>
+
 <ion-list *ngFor="let step of stepList" lines="none">
   <ion-item button *ngIf="step.status == 'completed'" (click)="showDetails(step, maintenance)">
       <ion-avatar>

@@ -31,7 +31,7 @@ export class AppComponent {
     this.storageService.authState.subscribe(state => {
       console.log('STATO:', state);
       if (state) {
-        //this.router.navigate(['tabs']);
+        this.router.navigate(['tabs']);
       } /*else {
         this.router.navigate(['login'], { skipLocationChange: true });
       }*/

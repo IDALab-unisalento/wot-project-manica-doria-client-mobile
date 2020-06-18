@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: MaintenanceTabPage,
-    children: [
+    /*children: [
       {
         path: 'search',
         loadChildren: () => import('./children/search/search.module').then(m => m.SearchPageModule)
@@ -20,7 +20,11 @@ const routes: Routes = [
         path: '',
         redirectTo: 'search',
         pathMatch: 'full'
-      }]
+      }]*/
+  },
+  {
+    path: 'step-list',
+    loadChildren: () => import('./children/step-list/step-list.module').then(m => m.StepListPageModule)
   },
 ];
 

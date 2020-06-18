@@ -9,6 +9,7 @@ import { MaintenanceTabPageRoutingModule } from './maintenance-tab-routing.modul
 
 import { MaintenanceTabPage } from './maintenance-tab.page';
 import { SharedComponentModule } from '../shared/shared.module';
+import {SearchCardComponent} from './children/search-card/search-card.component';
 
 
 
@@ -20,6 +21,6 @@ import { SharedComponentModule } from '../shared/shared.module';
     MaintenanceTabPageRoutingModule,
     SharedComponentModule,
   ],
-  declarations: [MaintenanceTabPage]
+  declarations: [MaintenanceTabPage, SearchCardComponent]
 })
 export class MaintenanceTabPageModule { }

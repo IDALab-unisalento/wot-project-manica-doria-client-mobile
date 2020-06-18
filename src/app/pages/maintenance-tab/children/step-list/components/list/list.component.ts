@@ -53,4 +53,7 @@ export class ListComponent implements OnInit {
     this.router.navigate([step.id], { relativeTo: this.route.parent });
   }
 
+  close() {
+    this.router.navigate(['/tabs'], { relativeTo: this.route });
+  }
 }
