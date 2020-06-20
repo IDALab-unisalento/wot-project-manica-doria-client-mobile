@@ -26,6 +26,8 @@ export class DetailsComponent implements OnInit {
     retry: false,
   };
 
+  check: boolean;
+
   time = 0;
 
   constructor(private dataSharing: DataSharingService,
@@ -73,36 +75,34 @@ export class DetailsComponent implements OnInit {
     return this.time;
   }
 
-  completeStep() {
-    this.result.found = false;
-    this.checkBeacon();
-    if (this.result.found) {
-      this.stepService.completeStep(this.getTime(), this.selectedStep.id, this.selectedMaintenace.id).subscribe(data => {
+  async completeStep() {
+
+    this.check = await this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac);
+    console.log('CHECK DOPO COMPLETA: ', this.check);
+    if (this.check) {
+      await this.stepService.completeStep(this.getTime(), this.selectedStep.id, this.selectedMaintenace.id).subscribe(data => {
         console.log(this.selectedStep.status);
       });
-      this.clearTimer();
       this.router.navigate(['..'], {relativeTo: this.route});
-    } else {
-      console.log('NON SEI VICINO AL BEACON');
     }
   }
 
   async getBeacon() {
     this.beacon = this.selectedStep.zone.beacon;
-    console.log('B', this.beacon);
     if (this.selectedStep.status === 'started') {
       this.checkBeacon();
     }
   }
 
   async checkBeacon() {
-    console.log('Enable prima', this.result.found);
-    console.log('Sto cercando questo');
-    console.log(this.beacon);
-    this.result = await this.bleService.findBeacon();
+    console.log('RESULT PRIMA DELLO STEP', this.result.found);
+    this.result = await this.bleService.findBeaconForever(this.beacon.name, this.beacon.mac);
   }
 
   close() {
+    this.bleService.stopScanBeacon();
+    this.result.found = false;
+    this.result.retry = false;
     this.router.navigate(['..'], { relativeTo: this.route });
   }
 

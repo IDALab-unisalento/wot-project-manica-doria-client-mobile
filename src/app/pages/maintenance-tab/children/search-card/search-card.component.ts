@@ -28,6 +28,13 @@ export class SearchCardComponent implements OnInit {
     retry: false,
   };
 
+  resultCheck = {
+    found: false,
+    retry: false,
+  };
+
+  check: boolean;
+
   zoneList: Zone[];
 
   // @Output() showMenu: EventEmitter<boolean>;
@@ -51,8 +58,8 @@ export class SearchCardComponent implements OnInit {
     });
   }
 
-  async getMaintenanceByStatusAndUser(id: string) {
-    await this.maintenanceService.getMaintenanceByStatusAndUser('started', id)
+   getMaintenanceByStatusAndUser(id: string) {
+      this.maintenanceService.getMaintenanceByStatusAndUser('started', id)
         .subscribe(
             data => {
               console.log('Maintenance By Status And User: ', data);
@@ -75,12 +82,13 @@ export class SearchCardComponent implements OnInit {
             });
   }
 
-  async getZoneByIdMachine(id: number) {
-    await this.zoneService.getAllZoneByMachineId(id).subscribe(data => {
+  getZoneByIdMachine(id: number) {
+      this.zoneService.getAllZoneByMachineId(id).subscribe(data => {
       this.zoneList = data;
       this.beacon = this.zoneList[0].beacon;
       console.log('B', this.beacon);
       this.checkBeacon();
+      console.log('dopo dopo', this.result.found);
     });
   }
 
@@ -88,21 +96,29 @@ export class SearchCardComponent implements OnInit {
     if (this.maintenanceLength !== 0) {
       console.log('Sto cercando questo');
       console.log(this.beacon);
-      // tslint:disable-next-line:no-unused-expression
+      console.log('prima', this.result.found);
       this.result = await this.bleService.findBeacon(this.beacon.name, this.beacon.mac);
+      console.log('dopo', this.result.found);
     }
   }
 
   goMaintenaceList() {
     this.router.navigate(['/tabs/maintenance-list-tab'], { relativeTo: this.route.parent });
   }
+
   goAvvia() {
-    this.router.navigate(['/tabs/maintenance-tab/step-list'], { relativeTo: this.route.parent });
+      this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).then( data => {
+          this.check = data;
+          console.log('DENTRO PROMISE', this.check);
+          if (this.check) {
+              this.router.navigate(['/tabs/maintenance-tab/step-list'], { relativeTo: this.route.parent });
+          }
+      });
   }
 
-  retrySearchBeacon() {
+  async retrySearchBeacon() {
     this.result.retry = false;
     console.log('RETRY');
-    this.checkBeacon();
+    await this.checkBeacon();
   }
 }
