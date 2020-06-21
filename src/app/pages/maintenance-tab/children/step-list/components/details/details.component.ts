@@ -78,15 +78,16 @@ export class DetailsComponent implements OnInit {
   async completeStep() {
 
     this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
-      data => this.check = data
+      data => {
+        this.check = data;
+        if (this.check) {
+          this.stepService.completeStep(this.getTime(), this.selectedStep.id, this.selectedMaintenace.id).subscribe( () => {
+            console.log('step completato');
+          });
+          this.router.navigate(['..'], { relativeTo: this.route });
+        }
+      }
     );
-    console.log('CHECK DOPO COMPLETA: ', this.check);
-    if (this.check) {
-      await this.stepService.completeStep(this.getTime(), this.selectedStep.id, this.selectedMaintenace.id).subscribe(data => {
-        console.log(this.selectedStep.status);
-      });
-      this.router.navigate(['..'], { relativeTo: this.route });
-    }
   }
 
   async getBeacon() {

@@ -156,15 +156,13 @@ export class BleService {
             if (device.rssi > -80) {
               console.log('Stop Trovato Check');
               this.ble.stopScan();
+              this.resultCheck = true;
               obs.next(true);
             }
           }
         });
       }
-    )
-
-
-
+    );
   }
 
   stopScanBeacon() {
