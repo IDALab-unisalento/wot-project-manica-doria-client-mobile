@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BLE } from '@ionic-native/ble/ngx';
 import { UtilisService } from './utilis.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,49 +19,56 @@ export class BleService {
   };
 
   resultCheck: boolean;
+  beacon: string;
 
-  constructor(private ble: BLE, private utils: UtilisService) { }
+  constructor(private ble: BLE, private utils: UtilisService) {
 
-  async findBeacon(name?: string, mac?: string) {
+  }
 
-    setTimeout(() => {
-      if (!this.result.found) {
-        console.log('stopScan Tempo Scaduto');
-        this.result.retry = true;
-        this.result.found = false;
-        this.ble.stopScan();
-        this.utils.showToast({
-          header: 'Beacon Non Trovato',
-          message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
-          duration: 3000,
-          position: 'top',
-          cssClass: 'toast-danger'
+  findBeacon(name?: string, mac?: string): Observable<any> {
+
+    return new Observable(
+      obs => {
+
+        setTimeout(() => {
+          if (!this.result.found) {
+            console.log('stopScan Tempo Scaduto');
+            this.result.retry = true;
+            this.result.found = false;
+            obs.next(this.result);
+            this.ble.stopScan();
+            this.utils.showToast({
+              header: 'Beacon Non Trovato',
+              message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
+              duration: 3000,
+              position: 'top',
+              cssClass: 'toast-danger'
+            });
+          } else {
+            this.utils.showToast({
+              header: 'Beacon Trovato',
+              message: name,
+              duration: 3000,
+              position: 'top',
+              cssClass: 'toast-success'
+            });
+          }
+        }, 5000);
+
+
+        this.ble.startScan([]).subscribe(device => {
+          console.log(device);
+          if (device.name === name || device.id === mac) {
+            if (device.rssi > -80) {
+              this.result.found = true;
+              this.result.retry = false;
+              obs.next(this.result);
+              console.log('Stop Trovato');
+              this.ble.stopScan();
+            }
+          }
         });
-      } else {
-        this.utils.showToast({
-          header: 'Beacon Trovato',
-          message: name,
-          duration: 3000,
-          position: 'top',
-          cssClass: 'toast-success'
-        });
-      }
-    }, 5000);
-
-
-    await this.ble.startScan([]).subscribe(device => {
-      console.log(device);
-      if (device.name === name || device.id === mac) {
-        if (device.rssi > -80) {
-          this.result.found = true;
-          this.result.retry = false;
-          console.log('Stop Trovato');
-          this.ble.stopScan();
-        }
-      }
-    });
-
-    return this.result;
+      });
   }
 
   async findBeaconForever(name?: string, mac?: string) {
@@ -88,40 +96,84 @@ export class BleService {
     return this.resultForever;
   }
 
-  async findBeaconCheck(name?: string, mac?: string) {
+  // async findBeaconCheck(name?: string, mac?: string) {
 
-    setTimeout(() => {
-      if (!this.resultCheck) {
-        console.log('stopScan Tempo Scaduto');
-        this.resultCheck = false;
-        this.ble.stopScan();
-        this.utils.showToast({
-          header: 'Beacon Non Trovato',
-          message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
-          duration: 3000,
-          position: 'top',
-          cssClass: 'toast-danger'
+  //   setTimeout(() => {
+  //     if (!this.resultCheck) {
+  //       console.log('stopScan Tempo Scaduto');
+  //       this.resultCheck = false;
+  //       this.ble.stopScan();
+  //       this.utils.showToast({
+  //         header: 'Beacon Non Trovato',
+  //         message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
+  //         duration: 3000,
+  //         position: 'top',
+  //         cssClass: 'toast-danger'
+  //       });
+  //     }
+  //   }, 1000);
+
+
+  //   await this.ble.startScan([]).subscribe(device => {
+  //     console.log(device);
+  //     this.resultCheck = false;
+  //     if (device.name === name || device.id === mac) {
+  //       if (device.rssi > -80) {
+  //         this.resultCheck = true;
+  //         console.log('Stop Trovato Check');
+  //         this.ble.stopScan();
+  //       }
+  //     }
+  //   });
+
+  //   return this.resultCheck;
+  // }
+
+  findBeaconCheck(name?: string, mac?: string): Observable<boolean> {
+
+    return new Observable(
+      obs => {
+
+        setTimeout(() => {
+          if (!this.resultCheck) {
+            console.log('stopScan Tempo Scaduto');
+            obs.next(false);
+            this.ble.stopScan();
+            this.utils.showToast({
+              header: 'Beacon Non Trovato',
+              message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
+              duration: 3000,
+              position: 'top',
+              cssClass: 'toast-danger'
+            });
+          }
+        }, 1000);
+
+        this.ble.startScan([]).subscribe(device => {
+          console.log(device);
+          this.resultCheck = false;
+          if (device.name === name || device.id === mac) {
+            if (device.rssi > -80) {
+              console.log('Stop Trovato Check');
+              this.ble.stopScan();
+              obs.next(true);
+            }
+          }
         });
       }
-    }, 1000);
+    )
 
 
-    await this.ble.startScan([]).subscribe(device => {
-      console.log(device);
-      this.resultCheck = false;
-      if (device.name === name || device.id === mac) {
-        if (device.rssi > -80) {
-          this.resultCheck = true;
-          console.log('Stop Trovato Check');
-          this.ble.stopScan();
-        }
-      }
-    });
 
-    return this.resultCheck;
   }
 
   stopScanBeacon() {
     return this.ble.stopScan();
+  }
+
+
+
+  prova() {
+
   }
 }

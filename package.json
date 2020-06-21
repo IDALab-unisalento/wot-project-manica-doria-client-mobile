@@ -5,12 +5,12 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ionic serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "run ios": "ionic cordova run ios --device --external"
+    "run-ios": "ionic cordova run ios --device --external"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.2.0",
+    "@types/sockjs-client": "^1.1.1",
     "com.unarin.cordova.beacon": "^3.8.1",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-ble-central": "^1.2.5",
@@ -35,6 +36,9 @@
     "cordova-sqlite-storage": "^5.0.0",
     "dataformat": "^1.0.0",
     "rxjs": "~6.5.1",
+    "net": "^1.0.2",
+    "sockjs-client": "^1.3.0",
+    "stompjs": "^2.3.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
@@ -49,6 +53,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "@types/stompjs": "^2.3.4",
     "codelyzer": "^5.1.2",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",

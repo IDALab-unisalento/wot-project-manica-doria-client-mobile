@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {DataSharingService} from '../../../../../../services/data-sharing.service';
-import {StepService} from '../../../../../../services/step.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Step} from '../../../../../../models/step';
-import {Maintenance} from '../../../../../../models/maintenance';
-import {TimerService} from '../../../../../../services/timer.service';
-import {Beacon} from '../../../../../../models/beacon';
-import {BleService} from '../../../../../../services/ble.service';
-import {UtilisService} from '../../../../../../services/utilis.service';
+import { DataSharingService } from '../../../../../../services/data-sharing.service';
+import { StepService } from '../../../../../../services/step.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Step } from '../../../../../../models/step';
+import { Maintenance } from '../../../../../../models/maintenance';
+import { TimerService } from '../../../../../../services/timer.service';
+import { Beacon } from '../../../../../../models/beacon';
+import { BleService } from '../../../../../../services/ble.service';
+import { UtilisService } from '../../../../../../services/utilis.service';
 
 
 @Component({
@@ -31,26 +31,26 @@ export class DetailsComponent implements OnInit {
   time = 0;
 
   constructor(private dataSharing: DataSharingService,
-              private stepService: StepService,
-              private timerService: TimerService,
-              private bleService: BleService,
-              private utils: UtilisService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private stepService: StepService,
+    private timerService: TimerService,
+    private bleService: BleService,
+    private utils: UtilisService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.dataSharing.getCurrentStep().subscribe(
-        data => {
-          this.selectedStep = data;
-          this.getBeacon();
-        }
+      data => {
+        this.selectedStep = data;
+        this.getBeacon();
+      }
     );
     this.dataSharing.getCurrentMaintenance().subscribe(
-        data => this.selectedMaintenace = data
+      data => this.selectedMaintenace = data
     );
     console.log(this.selectedStep);
 
-    if (this.selectedStep.status === 'started'){
+    if (this.selectedStep.status === 'started') {
       this.startTimer();
     }
   }
@@ -70,20 +70,22 @@ export class DetailsComponent implements OnInit {
 
   getTime(): number {
     this.timerService.getCurrentTimer().subscribe(data => {
-       return this.time = data;
+      return this.time = data;
     });
     return this.time;
   }
 
   async completeStep() {
 
-    this.check = await this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac);
+    this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
+      data => this.check = data
+    );
     console.log('CHECK DOPO COMPLETA: ', this.check);
     if (this.check) {
       await this.stepService.completeStep(this.getTime(), this.selectedStep.id, this.selectedMaintenace.id).subscribe(data => {
         console.log(this.selectedStep.status);
       });
-      this.router.navigate(['..'], {relativeTo: this.route});
+      this.router.navigate(['..'], { relativeTo: this.route });
     }
   }
 

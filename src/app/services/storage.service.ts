@@ -45,10 +45,10 @@ export class StorageService {
 
 
   async setUser(user: User) {
-    console.log("sono qui")
     await this.storage.set('id', String(user.id));
     await this.storage.set('role', String(user.role));
     await this.storage.set('email', String(user.email));
+    await this.storage.set('name', String(user.name));
   }
 
   async getEmail() {
@@ -61,6 +61,10 @@ export class StorageService {
 
   async getId() {
     return await this.storage.get('id');
+  }
+
+  async getName() {
+    return await this.storage.get('name');
   }
 
   isAuthenticated() {
