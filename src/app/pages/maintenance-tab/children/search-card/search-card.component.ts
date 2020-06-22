@@ -1,3 +1,4 @@
+import { DataSharingService } from './../../../../services/data-sharing.service';
 import { Component, OnInit } from '@angular/core';
 import { Zone } from '../../../../models/zone';
 import { Maintenance } from '../../../../models/maintenance';
@@ -43,14 +44,16 @@ export class SearchCardComponent implements OnInit {
   maintenanceLength: number;
   beacon: Beacon;
 
-  constructor(private maintenanceService: MaintenanceService,
+  constructor(
+    private maintenanceService: MaintenanceService,
     private route: ActivatedRoute,
     private ble: BLE,
     private router: Router,
     private utils: UtilisService,
     private bleService: BleService,
     private storageService: StorageService,
-    private zoneService: ZoneService) { }
+    private zoneService: ZoneService,
+    private dataSharing: DataSharingService) { }
 
   ngOnInit() {
     this.storageService.getId().then(data => {
@@ -62,9 +65,9 @@ export class SearchCardComponent implements OnInit {
     this.maintenanceService.getMaintenanceByStatusAndUser('started', id)
       .subscribe(
         data => {
-          console.log('Maintenance By Status And User: ', data);
           this.maintenance = data;
           this.maintenanceLength = data.length;
+          this.dataSharing.setCurrentMaintenance(this.maintenance[0]);
 
           if (this.maintenanceLength === 0) {
             this.title = 'Non hai Manutenzioni Attive';

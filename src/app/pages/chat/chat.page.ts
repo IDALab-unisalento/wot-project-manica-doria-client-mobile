@@ -1,3 +1,4 @@
+import { DataSharingService } from './../../services/data-sharing.service';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
@@ -7,6 +8,7 @@ import { UtilisService } from 'src/app/services/utilis.service';
 import { User } from 'src/app/models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { WsService } from 'src/app/services/ws.service';
 
 
 @Component({
@@ -15,53 +17,64 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
-  content: string;
+
+  user: User;
+  message: Message;
+  maintenanceId: number;
+  chat: Chat;
   messages: Message[];
-  tempMessage = {} as Message;
-  idMaintenance = 1;
-  user = {} as User;
-  chat = {} as Chat;
+
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private utils: UtilisService,
     private chatService: ChatService,
-    private storageService: StorageService) { }
+    private ws: WsService,
+    private dataSharing: DataSharingService
+  ) { }
 
   ngOnInit() {
 
-    this.storageService.getEmail().then(
-      data => { this.user.email = data; }
-    );
-    this.storageService.getId().then(
-      data => { this.user.id = data; }
-    );
-
-    this.chatService.getMessageByMaintenanceId(this.idMaintenance).subscribe(
+    this.dataSharing.getCurrentUser().subscribe(
       data => {
-        this.chat.id = data.id;
-        this.messages = data.message.sort((a, b) => {
-          if (a.date < b.date) { return -1; }
-          else if (a.date > b.date) { return 1; }
-          else { return 0; }
-        });
+        this.user = data;
       }
     );
 
-    console.log(this.user);
+    this.dataSharing.getCurrentMaintenance().subscribe(
+      maintenance => {
+        this.chatService.getMessageByMaintenanceId(maintenance.id).subscribe(
+          data => {
+            this.chat = data;
+            this.messages = data.message.sort((a, b) => {
+              if (a.date < b.date) { return -1; }
+              else if (a.date > b.date) { return 1; }
+              else { return 0; }
+            });
+          });
+        this.ws.connect(maintenance.id);
+      }
+    );
+
+    this.ws.observeMessage.subscribe((msg: any) => {
+      if (msg !== undefined) {
+        this.messages.push(msg);
+      }
+    });
   }
 
   sendMessage(message: string) {
-    this.tempMessage.user = this.user;
-    this.tempMessage.chat = this.chat;
-    this.tempMessage.content = message;
-    this.tempMessage.date = Date.now();
 
-    this.chatService.sendMessage(this.tempMessage).subscribe(
-      data => console.log(data)
-    );
-    window.location.reload();
+    const tempMessage = {
+      user: {},
+      chat: {}
+    } as Message;
+
+    tempMessage.user = this.user;
+    tempMessage.chat.id = this.chat.id;
+    tempMessage.content = message;
+    tempMessage.date = Date.now();
+
+    console.log(tempMessage);
+    this.ws.sendMessage(tempMessage, 1);
 
 
   }

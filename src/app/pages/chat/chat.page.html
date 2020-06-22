@@ -15,22 +15,21 @@
     <ion-grid>
         <ion-row *ngFor="let message of messages; index as i">
             <ion-col [ngClass]="{'last-msg' : i == messages.length-1 }" size="9"
-                *ngIf="message.user.email !== this.user.email" class="message other-message">
-                <b>{{message.user.email}}</b><br>
+                *ngIf="message.user.name !== this.user.name" class="message other-message">
+                <b>{{message.user.name}}</b><br>
                 <span>{{message.content}}</span>
                 <div class="time ion-text-right ion-text-capitalize"><br>{{message.date | date:'short'}}</div>
             </ion-col>
 
             <ion-col [ngClass]="{'last-msg' : i == messages.length-1 }" size="9" offset="3"
-                *ngIf="message.user.email ===  this.user.email" class="message my-message">
-                <b>{{message.user.email}}</b><br>
+                *ngIf="message.user.name ===  this.user.name" class="message my-message">
+                <b>{{message.user.name}}</b><br>
                 <span>{{message.content}}</span>
                 <div class="time ion-text-right ion-text-capitalize"><br>{{message.date | date:'short'}}</div>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
-
 <ion-footer>
     <ion-toolbar>
         <ion-item lines=none>
@@ -47,3 +46,7 @@
         </ion-item>
     </ion-toolbar>
 </ion-footer>
+
+<!-- 
+   
+-->

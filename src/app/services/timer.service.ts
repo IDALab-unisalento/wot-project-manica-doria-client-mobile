@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,16 +7,18 @@ import {Observable} from 'rxjs';
 export class TimerService {
 
   time = 0;
+  t1 = 0;
+  partialTime = 0;
   interval: any;
   isStarted = false;
 
   constructor() { }
 
   startTimer() {
-    if (this.isStarted !== true){
+    if (this.isStarted !== true) {
       this.isStarted = true;
       this.interval = setInterval(() => {
-        this.time ++;
+        this.time++;
       }, 1000);
     }
   }
@@ -37,4 +39,8 @@ export class TimerService {
       observer.next(this.time);
     });
   }
+
+
+
+
 }
