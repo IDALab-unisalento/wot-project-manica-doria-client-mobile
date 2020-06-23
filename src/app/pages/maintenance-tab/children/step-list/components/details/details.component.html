@@ -19,12 +19,27 @@
   </ion-item>
 </ion-list>
 
-<ion-label *ngIf="selectedStep.status == 'started' && !result.found">Avvicinati alla {{selectedStep.zone.name}}</ion-label>
-<ion-spinner *ngIf="selectedStep.status == 'started' && !result.found" name="circles"></ion-spinner>
+<ion-row class="ion-align-items-center">
+  <ion-col offset="3">
+    <ion-label *ngIf="selectedStep.status == 'started' && !result.found">Avvicinati alla {{selectedStep.zone.name}}</ion-label>
+  </ion-col>
+</ion-row>
 
-<ion-button *ngIf="selectedStep.status == 'started' && result.found" class="primary-button" (click)="completeStep()">Completa
-</ion-button>
+<ion-row class="ion-align-items-center">
+  <ion-col offset="5">
+    <ion-spinner *ngIf="selectedStep.status == 'started' && !result.found" name="circles"></ion-spinner>
+  </ion-col>
+</ion-row>
 
+<ion-row class="ion-align-items-center">
+  <ion-col offset="3" size="6">
+    <ion-button *ngIf="selectedStep.status == 'started' && result.found" class="primary-button" (click)="completeStep()">Completa
+    </ion-button>
+  </ion-col>
+</ion-row>
+
+
+<!--
 <ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='startTimer()'>Start Timer
 </ion-button>
 <ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='pauseTimer()'>Pause</ion-button>
@@ -32,3 +47,4 @@
 <ion-button *ngIf="selectedStep.status == 'started'" class="primary-button" (click)='getTime()'>Get Time</ion-button>
 
 <p *ngIf="selectedStep.status == 'started'">Tempo trascorso: {{time}} secondi</p>
+-->

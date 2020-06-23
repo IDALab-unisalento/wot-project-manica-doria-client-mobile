@@ -73,6 +73,8 @@ export class BleService {
 
   async findBeaconForever(name?: string, mac?: string) {
 
+    this.resultForever.found = false;
+
     await this.ble.startScan([]).subscribe(device => {
       console.log(device);
       if (device.name === name || device.id === mac) {

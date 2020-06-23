@@ -23,7 +23,6 @@ export class SearchCardComponent implements OnInit {
 
   titleToolbar = 'Ricerca Beacon';
 
-  found: boolean;
   result = {
     found: false,
     retry: false,
@@ -53,7 +52,19 @@ export class SearchCardComponent implements OnInit {
     private bleService: BleService,
     private storageService: StorageService,
     private zoneService: ZoneService,
-    private dataSharing: DataSharingService) { }
+    private dataSharing: DataSharingService) {
+    route.params.subscribe(val => {
+
+      this.result = {
+        found: false,
+        retry: false,
+      };
+
+      this.storageService.getId().then(data => {
+        this.getMaintenanceByStatusAndUser(data);
+      });
+    });
+  }
 
   ngOnInit() {
     this.storageService.getId().then(data => {
@@ -76,7 +87,8 @@ export class SearchCardComponent implements OnInit {
             this.title = this.maintenance[0].name;
             this.subtitle = 'Avvicinati al Macchinario';
           }
-          this.getZoneByIdMachine(this.maintenance[0].id);
+          console.log('MMMMM', this.maintenance[0].id);
+          this.getZoneByIdMachine(this.maintenance[0].machine.id);
         },
         err => {
           console.log(err);
@@ -87,6 +99,7 @@ export class SearchCardComponent implements OnInit {
   getZoneByIdMachine(id: number) {
     this.zoneService.getAllZoneByMachineId(id).subscribe(data => {
       this.zoneList = data;
+      console.log('ZONAAAAAA', this.zoneList);
       this.beacon = this.zoneList[0].beacon;
       console.log('B', this.beacon);
       this.checkBeacon();

@@ -4,6 +4,7 @@ import { Maintenance } from '../models/maintenance';
 import { Observable, throwError } from 'rxjs';
 import { ApiVariables } from '../common/ApiVariables';
 import { catchError } from 'rxjs/operators';
+import {User} from '../models/user';
 
 
 const httpOptions = {
@@ -23,6 +24,8 @@ export class MaintenanceService {
   private saveMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/save';
   private deleteMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/delete/';
   private getMaintenanceByStatusAndUserUrl = ApiVariables.apiUrlMaintenance + '/getByStatusAndUser/';
+  private startMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/start/';
+  private completeMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/complete/';
 
   constructor(private http: HttpClient) { }
 
@@ -67,6 +70,18 @@ export class MaintenanceService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  startMaintenance(idMaintenance: number, idUser: number): Observable<Maintenance>{
+    return this.http.put<Maintenance>(this.startMaintenanceUrl + idMaintenance + '/' + idUser, httpOptions).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  completeMaintenance(idMaintenance: number): Observable<Maintenance>{
+    return this.http.put<Maintenance>(this.completeMaintenanceUrl + idMaintenance, httpOptions).pipe(
+        catchError(this.handleError)
+    );
   }
 
   handleError(error: HttpErrorResponse) {

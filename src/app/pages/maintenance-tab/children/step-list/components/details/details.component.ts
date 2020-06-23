@@ -31,12 +31,12 @@ export class DetailsComponent implements OnInit {
   time = 0;
 
   constructor(private dataSharing: DataSharingService,
-    private stepService: StepService,
-    private timerService: TimerService,
-    private bleService: BleService,
-    private utils: UtilisService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+              private stepService: StepService,
+              private timerService: TimerService,
+              private bleService: BleService,
+              private utils: UtilisService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.dataSharing.getCurrentStep().subscribe(
