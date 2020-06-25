@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpErrorResponse, HttpEvent} from '@angular/common/http';
 import { Attachment } from '../models/attachment';
 import { Observable, throwError } from 'rxjs';
 import { ApiVariables } from '../common/ApiVariables';
@@ -20,8 +20,39 @@ export class AttachmentService {
   private getAttachmentByIdUrl = ApiVariables.apiUrlAttachment + '/getById/';
   private saveAttachmentUrl = ApiVariables.apiUrlAttachment + '/save';
   private deleteAttachmentUrl = ApiVariables.apiUrlAttachment + '/delete/';
+  private uploadAttachmentUrl = ApiVariables.apiUrlAttachment + '/upload/';
+  private getFileAttachmentUrl = ApiVariables.apiUrlAttachment + '/getFile/';
 
   constructor(private http: HttpClient) { }
+
+  private static getInfoFromBase64(base64: string) {
+    const meta = base64.split(',')[0];
+    const rawBase64 = base64.split(',')[1].replace(/\s/g, '');
+    const mime = /:([^;]+);/.exec(meta)[1];
+    const extension = /\/([^;]+);/.exec(meta)[1];
+    return {
+      mime,
+      extension,
+      meta,
+      rawBase64
+    };
+  }
+
+  private static convertBase64ToBlob(base64: string) {
+    const info = AttachmentService.getInfoFromBase64(base64);
+    const sliceSize = 512;
+    const byteCharacters = window.atob(info.rawBase64);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      byteArrays.push(new Uint8Array(byteNumbers));
+    }
+    return new Blob(byteArrays, { type: info.mime });
+  }
 
   getAllAttachment(): Observable<Attachment[]> {
     return this.http.get<Attachment[]>(this.getAllAttachmentUrl).pipe(
@@ -55,5 +86,17 @@ export class AttachmentService {
       errorMessage = `Error Code: ${error.error.status}\nMessage: ${error.error.message}`;
     }
     return throwError(errorMessage);
+  }
+
+  uploadAttachment(file: File, type: string, idStep: string): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<HttpEvent<any>>(this.uploadAttachmentUrl + type + '/' + idStep, formData, {responseType: 'text'} as any);
+
+  }
+
+  getAttachment(id: number): Observable<string[]> {
+    return this.http.get<string[]>(this.getFileAttachmentUrl + id);
   }
 }

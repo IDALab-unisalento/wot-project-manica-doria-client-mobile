@@ -15,6 +15,9 @@
       <h2 class="light-text">Durata stimata: {{selectedStep.estimateDuration}}</h2>
       <h2 *ngIf="selectedStep.status == 'completed'" class="light-text">Durata effettiva: {{selectedStep.duration}}</h2>
       <h2 class="light-text">Attachment: </h2>
+      <div *ngFor="let image of sanitizedImageData">
+        <img [src] ="image"/>
+      </div>
     </ion-label>
   </ion-item>
 </ion-list>

@@ -4,6 +4,10 @@ import { Maintenance } from './../../../../models/maintenance';
 import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Step } from 'src/app/models/step';
+import {DomSanitizer} from '@angular/platform-browser';
+import {AttachmentService} from '../../../../services/attachment.service';
+import {Attachment} from '../../../../models/attachment';
+import {rename} from 'fs';
 
 @Component({
   selector: 'app-details',
@@ -29,7 +33,10 @@ export class DetailsComponent implements OnInit {
     );
 
     this.stepService.getStepByMaintenanceId(this.selectedMaintenance.id).subscribe(
-      data => this.steplist = data
+      data => {
+        console.log(data);
+        this.steplist = data;
+      }
     );
   }
 

@@ -4,4 +4,5 @@ export interface Attachment {
     path: string;
     filename: string;
     type: string;
+    image?: any[];
 }

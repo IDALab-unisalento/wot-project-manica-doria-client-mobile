@@ -8,6 +8,9 @@ import { TimerService } from '../../../../../../services/timer.service';
 import { Beacon } from '../../../../../../models/beacon';
 import { BleService } from '../../../../../../services/ble.service';
 import { UtilisService } from '../../../../../../services/utilis.service';
+import {Attachment} from '../../../../../../models/attachment';
+import {AttachmentService} from '../../../../../../services/attachment.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -21,6 +24,10 @@ export class DetailsComponent implements OnInit {
   selectedMaintenace: Maintenance;
   beacon: Beacon;
 
+  attachmentList: Attachment[];
+  image: string[];
+  sanitizedImageData = [];
+
   result = {
     found: false,
     retry: false,
@@ -33,6 +40,8 @@ export class DetailsComponent implements OnInit {
   constructor(private dataSharing: DataSharingService,
               private stepService: StepService,
               private timerService: TimerService,
+              private attachmentService: AttachmentService,
+              private sanitizer: DomSanitizer,
               private bleService: BleService,
               private utils: UtilisService,
               private router: Router,
@@ -42,6 +51,8 @@ export class DetailsComponent implements OnInit {
     this.dataSharing.getCurrentStep().subscribe(
       data => {
         this.selectedStep = data;
+        this.attachmentList = this.selectedStep.attachmentList;
+        this.getAttachment(this.selectedStep.id);
         this.getBeacon();
       }
     );
@@ -55,6 +66,16 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  getAttachment(id: number) {
+    this.attachmentService.getAttachment(id).subscribe(data => {
+      this.image = data;
+      for (let i = 0; i < this.image.length; i++){
+        const base64 = 'data:image/jpeg;base64,' + this.image[i];
+        this.sanitizedImageData[i] = (this.sanitizer.bypassSecurityTrustUrl(base64));
+        console.log('AAAAA', this.sanitizedImageData);
+      }
+    });
+  }
 
   startTimer() {
     this.timerService.startTimer();
