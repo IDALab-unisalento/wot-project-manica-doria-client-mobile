@@ -53,7 +53,7 @@ export class ChatPage implements OnInit {
               else { return 0; }
             });
           });
-        if (!this.ws.isConnected) {
+        if (this.ws.stompClient === undefined) {
           this.ws.connect(maintenance.id);
         }
       }

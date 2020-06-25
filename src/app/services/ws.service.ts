@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class WsService {
 
-  webSocketEndPoint = 'http://localhost:8080/ws';
+  webSocketEndPoint = 'http://192.168.1.5:8080/ws';
   topic = '/topic/greetings/';
 
   stompClient: any;
