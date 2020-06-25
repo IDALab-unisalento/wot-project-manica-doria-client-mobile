@@ -9,12 +9,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class WsService {
 
-  webSocketEndPoint = 'http://localhost:8081/ws';
+  webSocketEndPoint = 'http://localhost:8080/ws';
   topic = '/topic/greetings/';
 
   stompClient: any;
   messageReceived: any;
   observeMessage: any;
+
+  isConnected = false;
 
   constructor() {
     this.observeMessage = new BehaviorSubject<any>(this.messageReceived);
@@ -24,9 +26,9 @@ export class WsService {
     console.log('Initialize WebSocket Connection');
     const ws = new SockJS(this.webSocketEndPoint);
     this.stompClient = Stomp.over(ws);
-
     this.stompClient.connect({}, (frame: any) => {
       this.stompClient.subscribe(this.topic + id, (msgEvent: any) => {
+        this.isConnected = true;
         this.observeMessage.next(JSON.parse(msgEvent.body));
       });
     }, this.errorCallBack);
@@ -35,6 +37,7 @@ export class WsService {
   disconnect() {
     if (this.stompClient !== null) {
       this.stompClient.disconnect();
+      this.isConnected = false;
     }
     console.log('Disconnected');
   }

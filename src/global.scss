@@ -25,7 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
 /* 
 ---------------------------------------- 
           Component Custom
@@ -37,7 +36,7 @@ ion-input, ion-item {
 }
 
 ion-toolbar {
-  padding: 10px 0px;
+  padding: 20px 0px;
   --border-color: var(--light);
   @media (prefers-color-scheme: dark) {
     --border-color: var(--dark);
@@ -112,6 +111,7 @@ ion-tab-button {
 */
 
 .icon-toolbar{
+  overflow: visible;
   font-size: 2.3rem;
   padding: 5px 10px 5px 0;
    @media (prefers-color-scheme: dark) {

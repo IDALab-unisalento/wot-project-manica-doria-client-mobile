@@ -1,14 +1,13 @@
 import { DataSharingService } from './../../services/data-sharing.service';
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 import { Message } from 'src/app/models/message';
 import { Chat } from 'src/app/models/chat';
-import { UtilisService } from 'src/app/services/utilis.service';
 import { User } from 'src/app/models/user';
-import { Router, ActivatedRoute } from '@angular/router';
-import { StorageService } from 'src/app/services/storage.service';
+
 import { WsService } from 'src/app/services/ws.service';
+import { IonContent } from '@ionic/angular';
 
 
 @Component({
@@ -17,13 +16,15 @@ import { WsService } from 'src/app/services/ws.service';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
+  @ViewChild('textArea') inputText: any;
+  @ViewChild('ionContent') ionContent: IonContent;
 
   user: User;
   message: Message;
   maintenanceId: number;
   chat: Chat;
-  messages: Message[];
-
+  messages = [];
+  content = '';
 
   constructor(
     private chatService: ChatService,
@@ -32,6 +33,8 @@ export class ChatPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    setTimeout(() => this.ionContent.scrollToBottom(), 200);
 
     this.dataSharing.getCurrentUser().subscribe(
       data => {
@@ -50,13 +53,16 @@ export class ChatPage implements OnInit {
               else { return 0; }
             });
           });
-        this.ws.connect(maintenance.id);
+        if (!this.ws.isConnected) {
+          this.ws.connect(maintenance.id);
+        }
       }
     );
 
     this.ws.observeMessage.subscribe((msg: any) => {
       if (msg !== undefined) {
         this.messages.push(msg);
+        setTimeout(() => this.ionContent.scrollToBottom(), 200);
       }
     });
   }
@@ -75,8 +81,7 @@ export class ChatPage implements OnInit {
 
     console.log(tempMessage);
     this.ws.sendMessage(tempMessage, 1);
-
-
+    this.inputText.value = '';
   }
 
 }
