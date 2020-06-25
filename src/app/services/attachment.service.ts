@@ -96,7 +96,7 @@ export class AttachmentService {
 
   }
 
-  getAttachment(id: number): Observable<string[]> {
-    return this.http.get<string[]>(this.getFileAttachmentUrl + id);
+  getAttachment(id: number): Observable<Attachment[]> {
+    return this.http.get<Attachment[]>(this.getFileAttachmentUrl + id);
   }
 }

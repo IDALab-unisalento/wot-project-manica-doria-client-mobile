@@ -27,6 +27,7 @@ export class DetailsComponent implements OnInit {
   attachmentList: Attachment[];
   image: string[];
   sanitizedImageData = [];
+  attachment: Attachment;
 
   result = {
     found: false,
@@ -51,7 +52,6 @@ export class DetailsComponent implements OnInit {
     this.dataSharing.getCurrentStep().subscribe(
       data => {
         this.selectedStep = data;
-        this.attachmentList = this.selectedStep.attachmentList;
         this.getAttachment(this.selectedStep.id);
         this.getBeacon();
       }
@@ -68,12 +68,14 @@ export class DetailsComponent implements OnInit {
 
   getAttachment(id: number) {
     this.attachmentService.getAttachment(id).subscribe(data => {
-      this.image = data;
-      for (let i = 0; i < this.image.length; i++){
+      this.attachmentList = data;
+      console.log(this.attachmentList);
+      /*for (let i = 0; i < this.image.length; i++){
         const base64 = 'data:image/jpeg;base64,' + this.image[i];
+        //const base64 = 'data:video/mp4;base64,' + this.image[i];
         this.sanitizedImageData[i] = (this.sanitizer.bypassSecurityTrustUrl(base64));
         console.log('AAAAA', this.sanitizedImageData);
-      }
+      }*/
     });
   }
 

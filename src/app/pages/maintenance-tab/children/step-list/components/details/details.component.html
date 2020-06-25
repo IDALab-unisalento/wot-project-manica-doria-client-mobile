@@ -15,8 +15,13 @@
       <h2 class="light-text">Durata stimata: {{selectedStep.estimateDuration}}</h2>
       <h2 *ngIf="selectedStep.status == 'completed'" class="light-text">Durata effettiva: {{selectedStep.duration}}</h2>
       <h2 class="light-text">Attachment: </h2>
-      <div *ngFor="let image of sanitizedImageData">
-        <img [src] ="image"/>
+      <div *ngFor="let attachment of attachmentList">
+        <ion-img *ngIf="attachment.type == 'image'" [src] ="attachment.file"></ion-img>
+       <video *ngIf="attachment.type == 'video'" width="240" height="200" controls>
+         <source [src]='attachment.file' type="video/mp4">
+         <source [src] ="attachment.file" type="video/ogg">
+         Your browser does not support the video tag.
+       </video>
       </div>
     </ion-label>
   </ion-item>
