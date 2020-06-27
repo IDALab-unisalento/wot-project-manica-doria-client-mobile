@@ -1,3 +1,4 @@
+import { WsService } from './../../../../services/ws.service';
 import { DataSharingService } from './../../../../services/data-sharing.service';
 import { Component, OnInit } from '@angular/core';
 import { Zone } from '../../../../models/zone';
@@ -52,7 +53,10 @@ export class SearchCardComponent implements OnInit {
     private bleService: BleService,
     private storageService: StorageService,
     private zoneService: ZoneService,
-    private dataSharing: DataSharingService) {
+    private dataSharing: DataSharingService,
+    private ws: WsService
+  ) {
+
     route.params.subscribe(val => {
 
       this.result = {
@@ -69,7 +73,10 @@ export class SearchCardComponent implements OnInit {
   ngOnInit() {
     this.storageService.getId().then(data => {
       this.getMaintenanceByStatusAndUser(data);
+    }).then(() => {
+      this.ws.connect(this.maintenance[0].id);
     });
+
   }
 
   getMaintenanceByStatusAndUser(id: string) {
@@ -87,35 +94,35 @@ export class SearchCardComponent implements OnInit {
             this.title = this.maintenance[0].name;
             this.subtitle = 'Avvicinati al Macchinario';
           }
-          console.log('MMMMM', this.maintenance[0].id);
+          // console.log('MMMMM', this.maintenance[0].id);
           this.getZoneByIdMachine(this.maintenance[0].machine.id);
         },
         err => {
-          console.log(err);
-          console.log(this.maintenance);
+          // console.log(err);
+          // console.log(this.maintenance);
         });
   }
 
   getZoneByIdMachine(id: number) {
     this.zoneService.getAllZoneByMachineId(id).subscribe(data => {
       this.zoneList = data;
-      console.log('ZONAAAAAA', this.zoneList);
+      // console.log('ZONAAAAAA', this.zoneList);
       this.beacon = this.zoneList[0].beacon;
-      console.log('B', this.beacon);
+      // console.log('B', this.beacon);
       this.checkBeacon();
-      console.log('dopo dopo', this.result.found);
+      // console.log('dopo dopo', this.result.found);
     });
   }
 
   async checkBeacon() {
     if (this.maintenanceLength !== 0) {
-      console.log('Sto cercando questo');
-      console.log(this.beacon);
-      console.log('prima', this.result.found);
+      // console.log('Sto cercando questo');
+      // console.log(this.beacon);
+      // console.log('prima', this.result.found);
       this.bleService.findBeacon(this.beacon.name, this.beacon.mac).subscribe(
         data => { this.result = data; }
       );
-      console.log('dopo', this.result.found);
+      // console.log('dopo', this.result.found);
     }
   }
 
@@ -127,7 +134,7 @@ export class SearchCardComponent implements OnInit {
     this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
       data => {
         this.check = data;
-        console.log('DENTRO PROMISE', this.check);
+        // console.log('DENTRO PROMISE', this.check);
         if (this.check) {
           this.router.navigate(['/tabs/maintenance-tab/step-list'], { relativeTo: this.route.parent });
         }
@@ -136,7 +143,7 @@ export class SearchCardComponent implements OnInit {
 
   async retrySearchBeacon() {
     this.result.retry = false;
-    console.log('RETRY');
+    // console.log('RETRY');
     await this.checkBeacon();
   }
 }

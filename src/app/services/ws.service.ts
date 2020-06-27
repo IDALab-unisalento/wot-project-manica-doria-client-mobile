@@ -6,6 +6,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { BehaviorSubject } from 'rxjs';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,13 @@ export class WsService {
 
   isConnected = false;
 
-  constructor(private route: ActivatedRoute, private notification: LocalNotifications) {
+  constructor(private backgroundMode: BackgroundMode, private route: ActivatedRoute, private notification: LocalNotifications) {
     this.observeMessage = new BehaviorSubject<any>(this.messageReceived);
   }
 
   connect(id: number) {
     console.log('Initialize WebSocket Connection');
+    this.backgroundMode.enable();
     const ws = new SockJS(this.webSocketEndPoint);
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, (frame: any) => {

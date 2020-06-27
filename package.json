@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
     "@capacitor/core": "2.1.2",
+    "@ionic-native/background-mode": "^5.27.0",
     "@ionic-native/ble": "^5.26.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/ibeacon": "^5.26.0",
@@ -32,6 +33,7 @@
     "@types/sockjs-client": "^1.1.1",
     "com.unarin.cordova.beacon": "^3.8.1",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-ble-central": "^1.2.5",
     "cordova-plugin-ibeacon": "^3.8.1",
@@ -88,7 +90,8 @@
       "cordova-plugin-ble-central": {},
       "com.unarin.cordova.beacon": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "ios"

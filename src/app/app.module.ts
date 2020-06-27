@@ -26,6 +26,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BLE } from '@ionic-native/ble/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { TimerService } from './services/timer.service';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 
 
@@ -46,6 +47,7 @@ import { TimerService } from './services/timer.service';
     SplashScreen,
     BLE,
     LocalNotifications,
+    BackgroundMode,
     MaintenanceService,
     UserService,
     AttachmentService,

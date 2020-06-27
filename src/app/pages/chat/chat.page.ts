@@ -56,6 +56,7 @@ export class ChatPage implements OnInit {
         if (this.ws.stompClient === undefined) {
           this.ws.connect(maintenance.id);
         }
+
       }
     );
 

@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { StorageService } from './services/storage.service';
 import { Router } from '@angular/router';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Component({
   selector: 'app-root',
@@ -21,17 +22,10 @@ export class AppComponent {
     private storageService: StorageService,
     private dataSharingService: DataSharingService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+
   ) {
     this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-
     this.storageService.authState.subscribe(state => {
       console.log('STATO:', state);
       if (state) {
@@ -45,5 +39,14 @@ export class AppComponent {
         this.router.navigate(['login'], { skipLocationChange: true });
       }*/
     });
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+
+
   }
 }
