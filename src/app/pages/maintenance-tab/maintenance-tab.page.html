@@ -1,1 +1,10 @@
 <app-search-card></app-search-card>
+
+<ion-button (click)="this.startTimer()">StartTimer</ion-button>
+<ion-button (click)="this.pauseTimer()">PauseTimer</ion-button>
+<ion-button (click)="this.closeTimer()">CloseTimer</ion-button>
+
+<h6>Start: {{this.timer.start | date:'mm:ss'}}</h6>
+<h6>Pause: {{this.timer.startPause | date:'mm:ss'}}</h6>
+<h6>SumPause: {{this.timer.sumPause | date:'mm:ss'}}</h6>
+<h6>Duration: {{this.timer.duration | date:'mm:ss'}}</h6>

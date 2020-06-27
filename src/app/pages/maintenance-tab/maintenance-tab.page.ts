@@ -1,3 +1,4 @@
+import { TimerService } from './../../services/timer.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaintenanceTabPage implements OnInit {
 
-  constructor() { }
+  constructor(private timer: TimerService) { }
 
   ngOnInit() {
+  }
+
+  startTimer() {
+    this.timer.startTimer();
+  }
+
+  pauseTimer() {
+    this.timer.pauseTimer();
+  }
+
+  closeTimer() {
+    this.timer.closeTimer();
+  }
+
+  clearTimer() {
+    this.timer.clearTimer();
   }
 
 }

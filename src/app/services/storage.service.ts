@@ -43,7 +43,6 @@ export class StorageService {
     window.location.reload();
   }
 
-
   async setUser(user: User) {
     await this.storage.set('id', String(user.id));
     await this.storage.set('role', String(user.role));
@@ -69,6 +68,14 @@ export class StorageService {
 
   isAuthenticated() {
     return this.authState.value;
+  }
+
+  setValue(key: string, value: any) {
+    return this.storage.set(key, value);
+  }
+
+  async getValue(key: string) {
+    return await this.storage.get(key);
   }
 
 }
