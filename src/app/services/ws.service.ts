@@ -1,15 +1,18 @@
+import { ActivatedRoute } from '@angular/router';
+import { ApiVariables } from './../common/ApiVariables';
 import { Message } from './../models/message';
 import { Injectable } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { BehaviorSubject } from 'rxjs';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WsService {
 
-  webSocketEndPoint = 'http://192.168.1.5:8080/ws';
+  webSocketEndPoint = 'http://' + ApiVariables.localhost + '/ws';
   topic = '/topic/greetings/';
 
   stompClient: any;
@@ -18,7 +21,7 @@ export class WsService {
 
   isConnected = false;
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private notification: LocalNotifications) {
     this.observeMessage = new BehaviorSubject<any>(this.messageReceived);
   }
 
@@ -28,8 +31,7 @@ export class WsService {
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, (frame: any) => {
       this.stompClient.subscribe(this.topic + id, (msgEvent: any) => {
-        this.isConnected = true;
-        this.observeMessage.next(JSON.parse(msgEvent.body));
+        this.onReceived(msgEvent);
       });
     }, this.errorCallBack);
   }
@@ -48,6 +50,22 @@ export class WsService {
     setTimeout(() => {
       this.connect(id);
     }, 5000);
+  }
+
+  onReceived(msg: any): void {
+    this.isConnected = true;
+    let received = {
+      user: {}
+    } as Message;
+    received = JSON.parse(msg.body);
+    this.notification.schedule(
+      {
+        title: 'Hai un nuovo messaggio',
+        text: received.content
+      }
+    );
+    this.observeMessage.next(received);
+
   }
 
   sendMessage(message: Message, id: number) {

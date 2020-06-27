@@ -24,6 +24,7 @@ import { StorageService } from './services/storage.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { BLE } from '@ionic-native/ble/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { TimerService } from './services/timer.service';
 
 
@@ -44,6 +45,7 @@ import { TimerService } from './services/timer.service';
     StatusBar,
     SplashScreen,
     BLE,
+    LocalNotifications,
     MaintenanceService,
     UserService,
     AttachmentService,
