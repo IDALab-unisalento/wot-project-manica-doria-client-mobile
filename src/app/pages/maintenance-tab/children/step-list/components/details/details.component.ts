@@ -11,6 +11,7 @@ import { UtilisService } from '../../../../../../services/utilis.service';
 import {Attachment} from '../../../../../../models/attachment';
 import {AttachmentService} from '../../../../../../services/attachment.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {UserMaintenance} from '../../../../../../models/user-maintenance';
 
 
 @Component({
@@ -21,7 +22,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class DetailsComponent implements OnInit {
 
   selectedStep: Step;
-  selectedMaintenace: Maintenance;
+  selectedUserMaintenance: UserMaintenance;
   beacon: Beacon;
 
   attachmentList: Attachment[];
@@ -57,7 +58,7 @@ export class DetailsComponent implements OnInit {
       }
     );
     this.dataSharing.getCurrentMaintenance().subscribe(
-      data => this.selectedMaintenace = data
+      data => this.selectedUserMaintenance = data
     );
     console.log(this.selectedStep);
 
@@ -91,11 +92,8 @@ export class DetailsComponent implements OnInit {
     this.timerService.clearTimer();
   }
 
-  getTime(): number {
-    this.timerService.getCurrentTimer().subscribe(data => {
-      return this.time = data;
-    });
-    return this.time;
+  getTime() {
+    this.time = this.timerService.getTime();
   }
 
   async completeStep() {
@@ -104,7 +102,8 @@ export class DetailsComponent implements OnInit {
       data => {
         this.check = data;
         if (this.check) {
-          this.stepService.completeStep(this.getTime(), this.selectedStep.id, this.selectedMaintenace.id).subscribe( () => {
+          this.getTime();
+          this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id).subscribe( () => {
             console.log('step completato');
           });
           this.router.navigate(['..'], { relativeTo: this.route });
@@ -122,7 +121,10 @@ export class DetailsComponent implements OnInit {
 
   async checkBeacon() {
     console.log('RESULT PRIMA DELLO STEP', this.result.found);
-    this.result = await this.bleService.findBeaconForever(this.beacon.name, this.beacon.mac);
+    this.bleService.findBeaconForever(this.beacon.name, this.beacon.mac).subscribe(data => {
+      this.result = data;
+      console.log('DATAAAAAAAAA', this.result.found);
+    });
   }
 
   close() {

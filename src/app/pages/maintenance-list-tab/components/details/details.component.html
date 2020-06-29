@@ -7,8 +7,8 @@
 <ion-item lines=none>
   <ion-list>
     <ion-label class="ion-text-wrap">
-      <h2 class="warning-text"><b>{{selectedMaintenance.name}}</b></h2>
-      <h3 class="light-text">Tipo: <b>{{selectedMaintenance.type}}</b></h3>
+      <h2 class="warning-text"><b>{{selectedUserMaintenance.maintenance.name}}</b></h2>
+      <h3 class="light-text">Tipo: <b>{{selectedUserMaintenance.maintenance.type}}</b></h3>
     </ion-label>
   </ion-list>
 </ion-item>
@@ -18,8 +18,8 @@
 <ion-item lines=none>
   <ion-list>
     <ion-label class="ion-text-wrap">
-      <h2 class="warning-text"><b>{{selectedMaintenance.machine.name}}</b></h2>
-      <h3 class="light-text">N° Serie: <b>{{selectedMaintenance.machine.serialNumber}}</b></h3>
+      <h2 class="warning-text"><b>{{selectedUserMaintenance.maintenance.machine.name}}</b></h2>
+      <h3 class="light-text">N° Serie: <b>{{selectedUserMaintenance.maintenance.machine.serialNumber}}</b></h3>
     </ion-label>
   </ion-list>
 </ion-item>
@@ -29,7 +29,7 @@
 <ion-item lines=none>
   <ion-list>
     <h2 class="warning-text"><b>Steps</b></h2>
-    <ion-item lines=none *ngFor="let step of steplist">
+    <ion-item lines=none *ngFor="let step of stepList">
       <ion-label class="ion-text-wrap">
         <h2 class="light-text">{{step.name}}</h2>
         <h3>Duration: {{step.estimateDuration}}</h3>

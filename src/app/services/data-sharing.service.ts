@@ -3,27 +3,28 @@ import { Observable } from 'rxjs';
 import { Maintenance } from './../models/maintenance';
 import { Injectable } from '@angular/core';
 import { Step } from '../models/step';
+import {UserMaintenance} from '../models/user-maintenance';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataSharingService {
 
-  private currentMaintenace: Maintenance;
+  private currentUserMaintenance: UserMaintenance;
   private step: Step;
   user: User;
 
   constructor() { }
 
-  getCurrentMaintenance(): Observable<Maintenance> {
+  getCurrentMaintenance(): Observable<UserMaintenance> {
     return new Observable(observer => {
-      observer.next(this.currentMaintenace);
+      observer.next(this.currentUserMaintenance);
     });
   }
 
-  setCurrentMaintenance(maintenace: Maintenance): void {
-    console.log('Current Maintenance: ', maintenace);
-    this.currentMaintenace = maintenace;
+  setCurrentMaintenance(userMaintenance: UserMaintenance): void {
+    console.log('Current Maintenance: ', userMaintenance);
+    this.currentUserMaintenance = userMaintenance;
   }
 
   getCurrentStep(): Observable<Step> {

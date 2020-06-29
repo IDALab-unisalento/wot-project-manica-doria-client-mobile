@@ -4,6 +4,8 @@ import { MaintenanceService } from '../../../../services/maintenance.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../../../services/storage.service';
+import {UserMaintenance} from '../../../../models/user-maintenance';
+import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
 
 @Component({
   selector: 'app-list',
@@ -12,11 +14,11 @@ import { StorageService } from '../../../../services/storage.service';
 })
 export class ListComponent implements OnInit {
 
-  maintenanceList: Maintenance[];
+  userMaintenanceList: UserMaintenance[];
 
   constructor(
-    private maintenanceService: MaintenanceService,
-    private datasharing: DataSharingService,
+    private userMaintenanceService: UserMaintenanceService,
+    private dataSharing: DataSharingService,
     private router: Router,
     private route: ActivatedRoute,
     private storageService: StorageService) { }
@@ -28,14 +30,14 @@ export class ListComponent implements OnInit {
   }
 
   getMaintenanceByStatusAndUser(id: string) {
-    this.maintenanceService.getMaintenanceByStatusAndUser('completed', id).subscribe(data => {
+    this.userMaintenanceService.getMaintenanceByStatusAndUser('completed', id).subscribe(data => {
       console.log('Maintenance By User: ', data);
-      this.maintenanceList = data;
+      this.userMaintenanceList = data;
     });
   }
 
-  showDetails(maintenance: Maintenance) {
-    this.datasharing.setCurrentMaintenance(maintenance);
+  showDetails(maintenance: UserMaintenance) {
+    this.dataSharing.setCurrentMaintenance(maintenance);
     this.router.navigate([maintenance.id], { relativeTo: this.route.parent });
   }
 

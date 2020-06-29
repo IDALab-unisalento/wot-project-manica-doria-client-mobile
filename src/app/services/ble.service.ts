@@ -71,31 +71,32 @@ export class BleService {
       });
   }
 
-  async findBeaconForever(name?: string, mac?: string) {
+  findBeaconForever(name?: string, mac?: string): Observable<any>  {
 
-    this.resultForever.found = false;
+    return new Observable(
+        obs => {
 
-    await this.ble.startScan([]).subscribe(device => {
-      console.log(device);
-      if (device.name === name || device.id === mac) {
-        if (device.rssi > -80) {
-          this.resultForever.found = true;
-          this.resultForever.retry = false;
-          console.log('Stop Trovato');
-          this.utils.showToast({
-            header: 'Beacon Trovato',
-            message: device.name,
-            duration: 3000,
-            position: 'top',
-            cssClass: 'toast-success'
+          this.resultForever.found = false;
+          this.ble.startScan([]).subscribe(device => {
+            console.log(device);
+            if (device.name === name || device.id === mac) {
+              if (device.rssi > -80) {
+                this.resultForever.found = true;
+                this.resultForever.retry = false;
+                console.log('Stop Trovato');
+                this.utils.showToast({
+                  header: 'Beacon Trovato',
+                  message: device.name,
+                  duration: 3000,
+                  position: 'top',
+                  cssClass: 'toast-success'
+                });
+                this.ble.stopScan();
+                obs.next(this.result);
+              }
+            }
           });
-          this.ble.stopScan();
-          return this.resultForever;
-        }
-      }
-    });
-
-    return this.resultForever;
+        });
   }
 
   // async findBeaconCheck(name?: string, mac?: string) {

@@ -53,8 +53,8 @@ export class StepService {
     );
   }
 
-  completeStep(duration: number, idStep: number, idMaintenance: number): Observable<Step> {
-    return this.http.put<Step>(this.completeStepUrl + duration + '/' + idStep + '/' + idMaintenance,  httpOptions)
+  completeStep(duration: number, idStep: number, idMaintenance: number, idUserMaintenance: number): Observable<Step> {
+    return this.http.put<Step>(this.completeStepUrl + duration + '/' + idStep + '/' + idMaintenance + '/' + idUserMaintenance,  httpOptions)
         .pipe(
             catchError(this.handleError)
         );

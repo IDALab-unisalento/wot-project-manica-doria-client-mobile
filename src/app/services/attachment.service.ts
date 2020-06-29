@@ -22,6 +22,7 @@ export class AttachmentService {
   private deleteAttachmentUrl = ApiVariables.apiUrlAttachment + '/delete/';
   private uploadAttachmentUrl = ApiVariables.apiUrlAttachment + '/upload/';
   private getFileAttachmentUrl = ApiVariables.apiUrlAttachment + '/getFile/';
+  private getVideoUrl = ApiVariables.apiUrlAttachment + '/download';
 
   constructor(private http: HttpClient) { }
 
@@ -99,4 +100,20 @@ export class AttachmentService {
   getAttachment(id: number): Observable<Attachment[]> {
     return this.http.get<Attachment[]>(this.getFileAttachmentUrl + id);
   }
+
+  /*
+  getVideo(): any {
+    return this.http.get<any>(this.getVideoUrl,  {responseType: 'text'} as any);
+  }
+
+  base64EncodeUnicode(str) {
+    // First we escape the string using encodeURIComponent to get the UTF-8 encoding of the characters,
+    // then we convert the percent encodings into raw bytes, and finally feed it to btoa() function.
+    const utf8Bytes = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+      return String.fromCharCode(Number('0x' + p1));
+    });
+
+    return btoa(utf8Bytes);
+  }
+  */
 }

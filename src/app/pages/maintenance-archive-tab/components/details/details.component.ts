@@ -1,6 +1,5 @@
 import { Router, ActivationEnd, ActivatedRoute } from '@angular/router';
-import { StepService } from './../../../../services/step.service';
-import { Maintenance } from './../../../../models/maintenance';
+import { StepService } from '../../../../services/step.service';
 import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Step } from 'src/app/models/step';
@@ -8,6 +7,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {AttachmentService} from '../../../../services/attachment.service';
 import {Attachment} from '../../../../models/attachment';
 import {rename} from 'fs';
+import {UserMaintenance} from '../../../../models/user-maintenance';
 
 @Component({
   selector: 'app-details',
@@ -16,8 +16,8 @@ import {rename} from 'fs';
 })
 export class DetailsComponent implements OnInit {
 
-  selectedMaintenance: Maintenance;
-  steplist: Step[];
+  selectedUserMaintenance: UserMaintenance;
+  stepList: Step[];
 
   constructor(
     private dataSharing: DataSharingService,
@@ -29,13 +29,13 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.dataSharing.getCurrentMaintenance().subscribe(
-      data => this.selectedMaintenance = data
+      data => this.selectedUserMaintenance = data
     );
 
-    this.stepService.getStepByMaintenanceId(this.selectedMaintenance.id).subscribe(
+    this.stepService.getStepByMaintenanceId(this.selectedUserMaintenance.maintenance.id).subscribe(
       data => {
         console.log(data);
-        this.steplist = data;
+        this.stepList = data;
       }
     );
   }

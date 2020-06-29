@@ -2,15 +2,15 @@ import { WsService } from './../../../../services/ws.service';
 import { DataSharingService } from './../../../../services/data-sharing.service';
 import { Component, OnInit } from '@angular/core';
 import { Zone } from '../../../../models/zone';
-import { Maintenance } from '../../../../models/maintenance';
 import { Beacon } from '../../../../models/beacon';
-import { MaintenanceService } from '../../../../services/maintenance.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BLE } from '@ionic-native/ble/ngx';
 import { UtilisService } from '../../../../services/utilis.service';
 import { BleService } from '../../../../services/ble.service';
 import { StorageService } from '../../../../services/storage.service';
 import { ZoneService } from '../../../../services/zone.service';
+import {UserMaintenance} from '../../../../models/user-maintenance';
+import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
 
 @Component({
   selector: 'app-search-card',
@@ -40,12 +40,12 @@ export class SearchCardComponent implements OnInit {
 
   // @Output() showMenu: EventEmitter<boolean>;
 
-  maintenance: Maintenance[];
-  maintenanceLength: number;
+  userMaintenance: UserMaintenance[];
+  userMaintenanceLength: number;
   beacon: Beacon;
 
   constructor(
-    private maintenanceService: MaintenanceService,
+    private userMaintenanceService: UserMaintenanceService,
     private route: ActivatedRoute,
     private ble: BLE,
     private router: Router,
@@ -74,32 +74,32 @@ export class SearchCardComponent implements OnInit {
     this.storageService.getId().then(data => {
       this.getMaintenanceByStatusAndUser(data);
     }).then(() => {
-      this.ws.connect(this.maintenance[0].id);
+      this.ws.connect(this.userMaintenance[0].id);
     });
 
   }
 
   getMaintenanceByStatusAndUser(id: string) {
-    this.maintenanceService.getMaintenanceByStatusAndUser('started', id)
+    this.userMaintenanceService.getMaintenanceByStatusAndUser('started', id)
       .subscribe(
         data => {
-          this.maintenance = data;
-          this.maintenanceLength = data.length;
-          this.dataSharing.setCurrentMaintenance(this.maintenance[0]);
+          this.userMaintenance = data;
+          this.userMaintenanceLength = data.length;
+          this.dataSharing.setCurrentMaintenance(this.userMaintenance[0]);
 
-          if (this.maintenanceLength === 0) {
+          if (this.userMaintenanceLength === 0) {
             this.title = 'Non hai Manutenzioni Attive';
             this.subtitle = 'Accedi alle liste Manutenzioni';
           } else {
-            this.title = this.maintenance[0].name;
+            this.title = this.userMaintenance[0].maintenance.name;
             this.subtitle = 'Avvicinati al Macchinario';
           }
-          // console.log('MMMMM', this.maintenance[0].id);
-          this.getZoneByIdMachine(this.maintenance[0].machine.id);
+          // console.log('MMMMM', this.userMaintenance[0].id);
+          this.getZoneByIdMachine(this.userMaintenance[0].maintenance.machine.id);
         },
         err => {
           // console.log(err);
-          // console.log(this.maintenance);
+          // console.log(this.userMaintenance);
         });
   }
 
@@ -115,7 +115,7 @@ export class SearchCardComponent implements OnInit {
   }
 
   async checkBeacon() {
-    if (this.maintenanceLength !== 0) {
+    if (this.userMaintenanceLength !== 0) {
       // console.log('Sto cercando questo');
       // console.log(this.beacon);
       // console.log('prima', this.result.found);

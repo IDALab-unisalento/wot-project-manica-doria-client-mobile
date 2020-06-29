@@ -1,11 +1,11 @@
-<ion-label *ngIf="maintenanceList?.length == 0">Non hai manutenzioni completate</ion-label>
+<ion-label *ngIf="userMaintenanceList?.length == 0">Non hai manutenzioni completate</ion-label>
 <ion-list>
-  <ion-item button *ngFor="let maintenance of maintenanceList"
+  <ion-item button *ngFor="let maintenance of userMaintenanceList"
     (click)="showDetails(maintenance)" lines="none">
     <ion-label class="ion-text-wrap">
-      <h2 class="warning-text"><b>{{maintenance.name}}</b></h2>
-      <p class="light-text">{{maintenance.type}}</p>
-      <p class="light-text">{{maintenance.machine.name}}</p>
+      <h2 class="warning-text"><b>{{maintenance.maintenance.name}}</b></h2>
+      <p class="light-text">{{maintenance.maintenance.type}}</p>
+      <p class="light-text">{{maintenance.maintenance.machine.name}}</p>
     </ion-label>
   </ion-item>
 </ion-list>

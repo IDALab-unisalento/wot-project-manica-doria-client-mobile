@@ -7,6 +7,8 @@ import {StorageService} from '../../../../../../services/storage.service';
 import {Step} from '../../../../../../models/step';
 import {StepService} from '../../../../../../services/step.service';
 import {UtilisService} from '../../../../../../services/utilis.service';
+import {UserMaintenance} from '../../../../../../models/user-maintenance';
+import {UserMaintenanceService} from '../../../../../../services/user-maintenance.service';
 
 @Component({
   selector: 'app-list',
@@ -15,14 +17,14 @@ import {UtilisService} from '../../../../../../services/utilis.service';
 })
 export class ListComponent implements OnInit {
 
-  maintenanceList: Maintenance[];
-  maintenance: Maintenance;
+  userMaintenanceList: UserMaintenance[];
+  userMaintenance: UserMaintenance;
   stepList: Step[];
 
   constructor(
-      private maintenanceService: MaintenanceService,
+      private userMaintenanceService: UserMaintenanceService,
       private stepService: StepService,
-      private datasharing: DataSharingService,
+      private dataSharing: DataSharingService,
       private utilsService: UtilisService,
       private router: Router,
       private route: ActivatedRoute,
@@ -41,7 +43,7 @@ export class ListComponent implements OnInit {
   }
 
   getMaintenanceByStatusAndUser(id: string) {
-    this.maintenanceService.getMaintenanceByStatusAndUser('started', id).subscribe(data => {
+    this.userMaintenanceService.getMaintenanceByStatusAndUser('started', id).subscribe(data => {
       console.log(data);
       if (data.length === 0) {
         this.utilsService.showToast({
@@ -54,9 +56,9 @@ export class ListComponent implements OnInit {
         this.router.navigate(['/tabs/maintenance-tab']);
       }
       else {
-        this.maintenanceList = data;
-        this.maintenance = this.maintenanceList[0];
-        this.getStepListByMaintenance(this.maintenance.id);
+        this.userMaintenanceList = data;
+        this.userMaintenance = this.userMaintenanceList[0];
+        this.getStepListByMaintenance(this.userMaintenance.maintenance.id);
       }
     });
   }
@@ -68,9 +70,9 @@ export class ListComponent implements OnInit {
     });
   }
 
-  showDetails(step: Step, maintenance: Maintenance) {
-    this.datasharing.setCurrentMaintenance(maintenance);
-    this.datasharing.setCurrentStep(step);
+  showDetails(step: Step, maintenance: UserMaintenance) {
+    this.dataSharing.setCurrentMaintenance(maintenance);
+    this.dataSharing.setCurrentStep(step);
     this.router.navigate([step.id], { relativeTo: this.route.parent });
   }
 
