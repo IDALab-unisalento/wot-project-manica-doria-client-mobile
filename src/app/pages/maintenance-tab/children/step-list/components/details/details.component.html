@@ -3,7 +3,6 @@
     <ion-icon (click)="close()" class="icon-close" name="close-outline"></ion-icon>
   </ion-col>
 </ion-row>
-
 <ion-list *ngIf="selectedStep.status == 'completed' || result.found">
   <ion-list-header>
     Dettaglio {{selectedStep.name}}
@@ -16,35 +15,40 @@
       <h2 *ngIf="selectedStep.status == 'completed'" class="light-text">Durata effettiva: {{selectedStep.duration}}</h2>
       <h2 class="light-text">Attachment: </h2>
       <div *ngFor="let attachment of attachmentList">
-        <ion-img *ngIf="attachment.type == 'image'" [src] ="attachment.file"></ion-img>
-       <video *ngIf="attachment.type == 'video'" width="240" height="200" controls>
-         <source [src]='attachment.file' type="video/mp4">
-         <source [src] ="attachment.file" type="video/ogg">
-         Your browser does not support the video tag.
-       </video>
+        <ion-img *ngIf="attachment.type == 'image'" [src]="attachment.file"></ion-img>
+        <video *ngIf="attachment.type == 'video'" width="240" height="200" controls>
+          <source [src]='attachment.file' type="video/mp4">
+          <source [src]="attachment.file" type="video/ogg">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </ion-label>
   </ion-item>
 </ion-list>
 
 <ion-row class="ion-align-items-center">
-  <ion-col offset="3">
-    <ion-label *ngIf="selectedStep.status == 'started' && !result.found">Avvicinati alla {{selectedStep.zone.name}}</ion-label>
-  </ion-col>
-</ion-row>
-
-<ion-row class="ion-align-items-center">
-  <ion-col offset="5">
-    <ion-spinner *ngIf="selectedStep.status == 'started' && !result.found" name="circles"></ion-spinner>
-  </ion-col>
-</ion-row>
-
-<ion-row class="ion-align-items-center">
   <ion-col offset="3" size="6">
-    <ion-button *ngIf="selectedStep.status == 'started' && result.found" class="primary-button" (click)="completeStep()">Completa
+    <ion-button *ngIf="selectedStep.status == 'started' && result.found" class="primary-button"
+      (click)="completeStep()">Completa
     </ion-button>
   </ion-col>
 </ion-row>
+
+<div *ngIf="selectedStep.status == 'started' && !result.found" name="circles">
+  <ion-row class="ion-align-items-center">
+    <ion-col offset="3">
+      <ion-label>
+        Avvicinati alla {{selectedStep.zone.name}}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-align-items-center">
+    <ion-col offset="5">
+      <ion-spinner name="circles"></ion-spinner>
+    </ion-col>
+  </ion-row>
+</div>
 
 
 <!--

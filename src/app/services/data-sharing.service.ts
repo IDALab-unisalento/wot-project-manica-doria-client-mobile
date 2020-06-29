@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Maintenance } from './../models/maintenance';
 import { Injectable } from '@angular/core';
 import { Step } from '../models/step';
-import {UserMaintenance} from '../models/user-maintenance';
+import { UserMaintenance } from '../models/user-maintenance';
 
 @Injectable({
   providedIn: 'root'

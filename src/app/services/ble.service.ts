@@ -29,14 +29,11 @@ export class BleService {
 
     return new Observable(
       obs => {
-
-        setTimeout(() => {
+        const timer = setTimeout(() => {
           if (!this.result.found) {
             console.log('stopScan Tempo Scaduto');
-            this.result.retry = true;
-            this.result.found = false;
+            this.result = { found: false, retry: true };
             obs.next(this.result);
-            this.ble.stopScan();
             this.utils.showToast({
               header: 'Beacon Non Trovato',
               message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
@@ -44,59 +41,61 @@ export class BleService {
               position: 'top',
               cssClass: 'toast-danger'
             });
-          } else {
-            this.utils.showToast({
-              header: 'Beacon Trovato',
-              message: name,
-              duration: 3000,
-              position: 'top',
-              cssClass: 'toast-success'
-            });
           }
         }, 5000);
-
 
         this.ble.startScan([]).subscribe(device => {
           console.log(device);
           if (device.name === name || device.id === mac) {
-            if (device.rssi > -80) {
-              this.result.found = true;
-              this.result.retry = false;
+            if (device.rssi > -60) {
+              this.result = { found: true, retry: false };
+              console.log('this.result :>> ', this.result, '\n', Date.now());
               obs.next(this.result);
-              console.log('Stop Trovato');
+
+
+              this.utils.showToast({
+                header: 'Beacon Trovato',
+                message: name,
+                duration: 3000,
+                position: 'top',
+                cssClass: 'toast-success'
+              });
+
+
               this.ble.stopScan();
+              console.log('Stop Trovato');
             }
           }
         });
       });
   }
 
-  findBeaconForever(name?: string, mac?: string): Observable<any>  {
+  findBeaconForever(name?: string, mac?: string): Observable<any> {
 
     return new Observable(
-        obs => {
+      obs => {
 
-          this.resultForever.found = false;
-          this.ble.startScan([]).subscribe(device => {
-            console.log(device);
-            if (device.name === name || device.id === mac) {
-              if (device.rssi > -80) {
-                this.resultForever.found = true;
-                this.resultForever.retry = false;
-                console.log('Stop Trovato');
-                this.utils.showToast({
-                  header: 'Beacon Trovato',
-                  message: device.name,
-                  duration: 3000,
-                  position: 'top',
-                  cssClass: 'toast-success'
-                });
-                this.ble.stopScan();
-                obs.next(this.result);
-              }
+        this.resultForever.found = false;
+        this.ble.startScan([]).subscribe(device => {
+          console.log(device);
+          if (device.name === name || device.id === mac) {
+            if (device.rssi > -80) {
+              this.resultForever.found = true;
+              this.resultForever.retry = false;
+              console.log('Stop Trovato');
+              this.utils.showToast({
+                header: 'Beacon Trovato',
+                message: device.name,
+                duration: 3000,
+                position: 'top',
+                cssClass: 'toast-success'
+              });
+              this.ble.stopScan();
+              obs.next(this.result);
             }
-          });
+          }
         });
+      });
   }
 
   // async findBeaconCheck(name?: string, mac?: string) {

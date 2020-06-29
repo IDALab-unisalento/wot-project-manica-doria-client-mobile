@@ -8,10 +8,10 @@ import { TimerService } from '../../../../../../services/timer.service';
 import { Beacon } from '../../../../../../models/beacon';
 import { BleService } from '../../../../../../services/ble.service';
 import { UtilisService } from '../../../../../../services/utilis.service';
-import {Attachment} from '../../../../../../models/attachment';
-import {AttachmentService} from '../../../../../../services/attachment.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import {UserMaintenance} from '../../../../../../models/user-maintenance';
+import { Attachment } from '../../../../../../models/attachment';
+import { AttachmentService } from '../../../../../../services/attachment.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { UserMaintenance } from '../../../../../../models/user-maintenance';
 
 
 @Component({
@@ -39,100 +39,121 @@ export class DetailsComponent implements OnInit {
 
   time = 0;
 
-  constructor(private dataSharing: DataSharingService,
-              private stepService: StepService,
-              private timerService: TimerService,
-              private attachmentService: AttachmentService,
-              private sanitizer: DomSanitizer,
-              private bleService: BleService,
-              private utils: UtilisService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private dataSharing: DataSharingService,
+    private stepService: StepService,
+    private timerService: TimerService,
+    private attachmentService: AttachmentService,
+    private bleService: BleService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.dataSharing.getCurrentStep().subscribe(
-      data => {
-        this.selectedStep = data;
-        this.getAttachment(this.selectedStep.id);
-        this.getBeacon();
-      }
-    );
-    this.dataSharing.getCurrentMaintenance().subscribe(
-      data => this.selectedUserMaintenance = data
-    );
-    console.log(this.selectedStep);
+    this.dataSharing.getCurrentMaintenance()
+      .subscribe(
+        maintenance => this.selectedUserMaintenance = maintenance
+      );
 
-    if (this.selectedStep.status === 'started') {
-      this.startTimer();
-    }
+    this.dataSharing.getCurrentStep()
+      .subscribe(
+        step => {
+          this.selectedStep = step;
+          if (step.status === 'started') {
+            this.bleService.findBeacon(step.zone.beacon.name, step.zone.beacon.mac)
+              .subscribe(
+                result => {
+                  this.result.found = result.found;
+                  console.log('2. this.result :>> ', this.result, '\n', Date.now());
+                });
+          }
+          this.attachmentService.getAttachment(step.id).subscribe(
+            data => {
+              this.attachmentList = data;
+              console.log(this.attachmentList);
+            });
+        });
   }
 
-  getAttachment(id: number) {
-    this.attachmentService.getAttachment(id).subscribe(data => {
-      this.attachmentList = data;
-      console.log(this.attachmentList);
-      /*for (let i = 0; i < this.image.length; i++){
-        const base64 = 'data:image/jpeg;base64,' + this.image[i];
-        //const base64 = 'data:video/mp4;base64,' + this.image[i];
-        this.sanitizedImageData[i] = (this.sanitizer.bypassSecurityTrustUrl(base64));
-        console.log('AAAAA', this.sanitizedImageData);
-      }*/
-    });
-  }
+  //   ngOnInit() {
+  //     this.dataSharing.getCurrentStep().subscribe(
+  //       data => {
+  //         this.selectedStep = data;
+  //         this.getAttachment(this.selectedStep.id);
+  //         this.getBeacon();
+  //       }
+  //     );
+  //     this.dataSharing.getCurrentMaintenance().subscribe(
+  //       data => this.selectedUserMaintenance = data
+  //     );
+  //     console.log(this.selectedStep);
 
-  startTimer() {
-    this.timerService.startTimer();
-  }
+  //     if (this.selectedStep.status === 'started') {
+  //       this.startTimer();
+  //     }
+  //   }
 
-  pauseTimer() {
-    this.timerService.pauseTimer();
-  }
+  //   getAttachment(id: number) {
+  //     this.attachmentService.getAttachment(id).subscribe(data => {
+  //       this.attachmentList = data;
+  //       console.log(this.attachmentList);
+  //       /*for (let i = 0; i < this.image.length; i++){
+  //         const base64 = 'data:image/jpeg;base64,' + this.image[i];
+  //         //const base64 = 'data:video/mp4;base64,' + this.image[i];
+  //         this.sanitizedImageData[i] = (this.sanitizer.bypassSecurityTrustUrl(base64));
+  //         console.log('AAAAA', this.sanitizedImageData);
+  //       }*/
+  //     },
+  //       error => { console.log('ERROR IN ATTACHMENT :>> ', error); });
+  //   }
 
-  clearTimer() {
-    this.timerService.clearTimer();
-  }
+  //   completeStep() {
+  //     this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
+  //       data => {
+  //         this.check = data;
+  //         if (this.check) {
+  //           this.getTime();
+  //           this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id)
+  //             .subscribe(() => {
+  //               console.log('step completato');
+  //             });
+  //           this.router.navigate(['..'], { relativeTo: this.route });
+  //         }
+  //       }
+  //     );
+  //   }
 
-  getTime() {
-    this.time = this.timerService.getTime();
-  }
 
-  async completeStep() {
+  //   getBeacon() {
+  //     this.beacon = this.selectedStep.zone.beacon;
+  //     if (this.selectedStep.status === 'started') {
+  //       this.bleService.findBeaconForever(this.beacon.name, this.beacon.mac).subscribe(data => {
+  //         this.result = data;
+  //         console.log('RESULT :>> ', this.result.found);
+  //       });
+  //     }
+  //   }
 
-    this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
-      data => {
-        this.check = data;
-        if (this.check) {
-          this.getTime();
-          this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id).subscribe( () => {
-            console.log('step completato');
-          });
-          this.router.navigate(['..'], { relativeTo: this.route });
-        }
-      }
-    );
-  }
+  //   close() {
+  //     this.bleService.stopScanBeacon();
+  //     this.router.navigate(['..'], { relativeTo: this.route });
+  //   }
 
-  async getBeacon() {
-    this.beacon = this.selectedStep.zone.beacon;
-    if (this.selectedStep.status === 'started') {
-      this.checkBeacon();
-    }
-  }
 
-  async checkBeacon() {
-    console.log('RESULT PRIMA DELLO STEP', this.result.found);
-    this.bleService.findBeaconForever(this.beacon.name, this.beacon.mac).subscribe(data => {
-      this.result = data;
-      console.log('DATAAAAAAAAA', this.result.found);
-    });
-  }
+  //   startTimer() {
+  //     this.timerService.startTimer();
+  //   }
 
-  close() {
-    this.bleService.stopScanBeacon();
-    this.result.found = false;
-    this.result.retry = false;
-    this.router.navigate(['..'], { relativeTo: this.route });
-  }
+  //   pauseTimer() {
+  //     this.timerService.pauseTimer();
+  //   }
 
+  //   clearTimer() {
+  //     this.timerService.clearTimer();
+  //   }
+
+  //   getTime() {
+  //     this.time = this.timerService.getTime();
+  //   }
 
 }
