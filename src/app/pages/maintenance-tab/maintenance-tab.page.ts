@@ -22,7 +22,7 @@ export class MaintenanceTabPage implements OnInit {
   }
 
   closeTimer() {
-    this.timer.closeTimer();
+    this.timer.closeTimer().subscribe(time => console.log(time));
   }
 
   clearTimer() {

@@ -50,6 +50,7 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.dataSharing.getCurrentMaintenance()
       .subscribe(
         maintenance => this.selectedUserMaintenance = maintenance
@@ -73,6 +74,7 @@ export class DetailsComponent implements OnInit {
               console.log(this.attachmentList);
             });
         });
+    this.startTimer();
   }
 
   //   ngOnInit() {
@@ -107,21 +109,7 @@ export class DetailsComponent implements OnInit {
   //       error => { console.log('ERROR IN ATTACHMENT :>> ', error); });
   //   }
 
-  //   completeStep() {
-  //     this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
-  //       data => {
-  //         this.check = data;
-  //         if (this.check) {
-  //           this.getTime();
-  //           this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id)
-  //             .subscribe(() => {
-  //               console.log('step completato');
-  //             });
-  //           this.router.navigate(['..'], { relativeTo: this.route });
-  //         }
-  //       }
-  //     );
-  //   }
+  //  
 
 
   //   getBeacon() {
@@ -134,26 +122,43 @@ export class DetailsComponent implements OnInit {
   //     }
   //   }
 
-  //   close() {
-  //     this.bleService.stopScanBeacon();
-  //     this.router.navigate(['..'], { relativeTo: this.route });
-  //   }
+  close() {
+    this.bleService.stopScanBeacon();
+    this.pauseTimer();
+    this.router.navigate(['..'], { relativeTo: this.route });
+  }
+
+  completeStep() {
+    this.bleService.findBeaconCheck(this.beacon.name, this.beacon.mac).subscribe(
+      data => {
+        this.check = data;
+        if (this.check) {
+          this.closeTimer();
+          this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id)
+            .subscribe(() => {
+              console.log('step completato');
+            });
+          this.router.navigate(['..'], { relativeTo: this.route });
+        }
+      }
+    );
+  }
 
 
-  //   startTimer() {
-  //     this.timerService.startTimer();
-  //   }
+  startTimer() {
+    this.timerService.startTimer();
+  }
 
-  //   pauseTimer() {
-  //     this.timerService.pauseTimer();
-  //   }
+  pauseTimer() {
+    this.timerService.pauseTimer();
+  }
 
-  //   clearTimer() {
-  //     this.timerService.clearTimer();
-  //   }
+  clearTimer() {
+    this.timerService.clearTimer();
+  }
 
-  //   getTime() {
-  //     this.time = this.timerService.getTime();
-  //   }
+  closeTimer() {
+    this.timerService.closeTimer().subscribe(time => this.time = time);
+  }
 
 }

@@ -58,22 +58,25 @@ export class TimerService {
       error => console.log(error));
   }
 
-  closeTimer() {
-    this.localStorage.getValue('timer_start').then(
-      start => this.start = start,
-      error => console.error('LocalStorage Error:', error)
-    ).then(() => {
-      this.localStorage.getValue('timer_sumPause').then(
-        sumPause => this.sumPause = sumPause,
+  closeTimer(): Observable<number> {
+    return new Observable((obs) => {
+      this.localStorage.getValue('timer_start').then(
+        start => this.start = start,
         error => console.error('LocalStorage Error:', error)
+      ).then(() => {
+        this.localStorage.getValue('timer_sumPause').then(
+          sumPause => this.sumPause = sumPause,
+          error => console.error('LocalStorage Error:', error)
+        );
+      }).then(
+        () => {
+          let _duration = 0;
+          _duration = this.getTime() - this.sumPause;
+          console.log('duration', _duration);
+          obs.next(_duration);
+        }
       );
-    }).then(
-      () => {
-        this.duration = this.getTime() - this.sumPause;
-        console.log('duration', this.duration);
-        return this.duration;
-      }
-    );
+    });
   }
 
   clearTimer() {
