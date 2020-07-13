@@ -71,6 +71,8 @@ export class WsService {
   }
 
   sendMessage(message: Message, id: number) {
+    console.log('ID:>>', id);
+
     this.stompClient.send('/app/chat/' + id, {}, JSON.stringify(message));
   }
 }

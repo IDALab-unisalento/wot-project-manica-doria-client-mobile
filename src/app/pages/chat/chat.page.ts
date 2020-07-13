@@ -44,7 +44,9 @@ export class ChatPage implements OnInit {
 
     this.dataSharing.getCurrentMaintenance().subscribe(
       maintenance => {
-        this.chatService.getMessageByMaintenanceId(maintenance.id).subscribe(
+        this.maintenanceId = maintenance.maintenance.id;
+        console.log('Maintenance:>>', this.maintenanceId);
+        this.chatService.getMessageByMaintenanceId(maintenance.maintenance.id).subscribe(
           data => {
             this.chat = data;
             this.messages = data.message.sort((a, b) => {
@@ -53,12 +55,12 @@ export class ChatPage implements OnInit {
               else { return 0; }
             });
           });
+
         if (this.ws.stompClient === undefined) {
-          this.ws.connect(maintenance.id);
+          this.ws.connect(this.maintenanceId);
         }
 
-      }
-    );
+      });
 
     this.ws.observeMessage.subscribe((msg: any) => {
       if (msg !== undefined) {
@@ -76,12 +78,12 @@ export class ChatPage implements OnInit {
     } as Message;
 
     tempMessage.user = this.user;
-    tempMessage.chat.id = this.chat.id;
+    tempMessage.chat.id = this.maintenanceId;
     tempMessage.content = message;
     tempMessage.date = Date.now();
 
     console.log(tempMessage);
-    this.ws.sendMessage(tempMessage, 1);
+    this.ws.sendMessage(tempMessage, tempMessage.chat.id);
     this.inputText.value = '';
   }
 

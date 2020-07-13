@@ -9,8 +9,8 @@ import { UtilisService } from '../../../../services/utilis.service';
 import { BleService } from '../../../../services/ble.service';
 import { StorageService } from '../../../../services/storage.service';
 import { ZoneService } from '../../../../services/zone.service';
-import {UserMaintenance} from '../../../../models/user-maintenance';
-import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
+import { UserMaintenance } from '../../../../models/user-maintenance';
+import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
 
 @Component({
   selector: 'app-search-card',
@@ -74,7 +74,7 @@ export class SearchCardComponent implements OnInit {
     this.storageService.getId().then(data => {
       this.getMaintenanceByStatusAndUser(data);
     }).then(() => {
-      this.ws.connect(this.userMaintenance[0].id);
+      this.ws.connect(this.userMaintenance[0].maintenance.id);
     });
 
   }
