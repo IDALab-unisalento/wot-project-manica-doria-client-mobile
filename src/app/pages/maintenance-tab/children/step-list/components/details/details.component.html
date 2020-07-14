@@ -9,9 +9,13 @@
   </ion-list-header>
 
   <ion-item lines=none>
-    <ion-label>
-      <h2 class="light-text">Descrizione: {{selectedStep.description}}</h2>
-      <h2 class="light-text">Durata stimata: {{selectedStep.estimateDuration}}</h2>
+
+    <ion-label class="ion-text-wrap">
+      <h2 class="light-text">{{selectedStep.name}}</h2>
+      <h3>Duration: {{selectedStep.estimateDuration | date:"hh:mm"}}</h3>
+      <h3>Description:</h3>
+      <a class="warning-text" type="button" (click)="showDescription(selectedStep)"> Show More...</a>
+      <p [hidden]="!selectedStep.description_visible">{{selectedStep.description}}</p>
       <h2 *ngIf="selectedStep.status == 'completed'" class="light-text">Durata effettiva: {{selectedStep.duration}}</h2>
       <h2 class="light-text">Attachment: </h2>
       <div *ngFor="let attachment of attachmentList">
@@ -23,18 +27,19 @@
         </video>
       </div>
     </ion-label>
+
   </ion-item>
 </ion-list>
 
 <ion-row class="ion-align-items-center">
   <ion-col offset="3" size="6">
-    <ion-button *ngIf="selectedStep.status == 'started' && result.found" class="primary-button"
+    <ion-button *ngIf="selectedStep.status == 'in-progress' && result.found" class="primary-button"
       (click)="completeStep()">Completa
     </ion-button>
   </ion-col>
 </ion-row>
 
-<div *ngIf="selectedStep.status == 'started' && !result.found" name="circles">
+<div *ngIf="selectedStep.status == 'in-progress' && !result.found" name="circles">
   <ion-row class="ion-align-items-center">
     <ion-col offset="3">
       <ion-label>

@@ -6,22 +6,22 @@
 
 <ion-list *ngFor="let step of stepList" lines="none">
   <ion-item button *ngIf="step.status == 'completed'" (click)="showDetails(step, userMaintenance)">
-      <ion-avatar>
-        <ion-icon name="checkmark-sharp"></ion-icon>
-      </ion-avatar>
-      <ion-label class="ion-text-wrap" >
-        <h2 class="warning-text"><b>{{step.name}}</b></h2>
-        <p class="light-text">Durata stimata: {{step.estimateDuration}}</p>
-      </ion-label>
+    <ion-avatar>
+      <ion-icon name="checkmark-sharp"></ion-icon>
+    </ion-avatar>
+    <ion-label class="ion-text-wrap">
+      <h2 class="warning-text"><b>{{step.name}}</b></h2>
+      <p class="light-text">Durata stimata: {{step.estimateDuration | date:"hh:mm"}}</p>
+    </ion-label>
   </ion-item>
 
-  <ion-item button *ngIf="step.status == 'started'" (click)="showDetails(step, userMaintenance)">
+  <ion-item button *ngIf="step.status == 'in-progress'" (click)="showDetails(step, userMaintenance)">
     <ion-avatar>
       <ion-icon name="build-outline"></ion-icon>
     </ion-avatar>
-    <ion-label class="ion-text-wrap" >
+    <ion-label class="ion-text-wrap">
       <h2 class="warning-text"><b>{{step.name}}</b></h2>
-      <p class="light-text">Durata stimata: {{step.estimateDuration}}</p>
+      <p class="light-text">Durata stimata: {{step.estimateDuration | date:"hh:mm"}}</p>
     </ion-label>
   </ion-item>
 
@@ -29,9 +29,9 @@
     <ion-avatar>
 
     </ion-avatar>
-    <ion-label class="ion-text-wrap" >
+    <ion-label class="ion-text-wrap">
       <h2 class="warning-text"><b>{{step.name}}</b></h2>
-      <p class="light-text">Durata stimata: {{step.estimateDuration}}</p>
+      <p class="light-text">Durata stimata: {{step.estimateDuration | date:"hh:mm"}}</p>
     </ion-label>
   </ion-item>
 </ion-list>

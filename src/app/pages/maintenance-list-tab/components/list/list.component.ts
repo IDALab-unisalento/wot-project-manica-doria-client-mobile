@@ -4,8 +4,8 @@ import { Maintenance } from '../../../../models/maintenance';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../../../services/storage.service';
-import {UserMaintenance} from '../../../../models/user-maintenance';
-import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
+import { UserMaintenance } from '../../../../models/user-maintenance';
+import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
 
 @Component({
   selector: 'app-list',
@@ -31,7 +31,7 @@ export class ListComponent implements OnInit {
   }
 
   getMaintenanceByStatusAndUser(id: string) {
-    this.userMaintenanceService.getMaintenanceByStatusAndUser('in-progress', id).subscribe(data => {
+    this.userMaintenanceService.getMaintenanceByStatusAndUser('forwarded', id).subscribe(data => {
       console.log('Maintenance By User: ', data);
       this.userMaintenanceList = data;
     });

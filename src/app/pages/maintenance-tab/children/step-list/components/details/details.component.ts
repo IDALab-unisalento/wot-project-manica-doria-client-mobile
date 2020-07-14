@@ -60,7 +60,8 @@ export class DetailsComponent implements OnInit {
       .subscribe(
         step => {
           this.selectedStep = step;
-          if (step.status === 'started') {
+          this.beacon = this.selectedStep.zone.beacon;
+          if (step.status === 'in-progress') {
             this.bleService.findBeacon(step.zone.beacon.name, step.zone.beacon.mac)
               .subscribe(
                 result => {
@@ -161,4 +162,7 @@ export class DetailsComponent implements OnInit {
     this.timerService.closeTimer().subscribe(time => this.time = time);
   }
 
+  showDescription(step: Step) {
+    step.description_visible = !step.description_visible;
+  }
 }

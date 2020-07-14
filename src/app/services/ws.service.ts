@@ -7,6 +7,7 @@ import * as SockJS from 'sockjs-client';
 import { BehaviorSubject } from 'rxjs';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { DataSharingService } from './data-sharing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,12 @@ export class WsService {
 
   isConnected = false;
 
-  constructor(private backgroundMode: BackgroundMode, private route: ActivatedRoute, private notification: LocalNotifications) {
+  constructor(
+    private backgroundMode: BackgroundMode,
+    private route: ActivatedRoute,
+    private notification: LocalNotifications,
+    private datasharing: DataSharingService
+  ) {
     this.observeMessage = new BehaviorSubject<any>(this.messageReceived);
   }
 
@@ -60,12 +66,16 @@ export class WsService {
       user: {}
     } as Message;
     received = JSON.parse(msg.body);
-    this.notification.schedule(
-      {
-        title: 'Hai un nuovo messaggio',
-        text: received.content
-      }
-    );
+    this.datasharing.getCurrentUser().subscribe(
+      user => {
+        if (received.user.email === user.email) {
+          this.notification.schedule({
+            title: 'Hai un nuovo messaggio',
+            text: received.content
+          });
+        }
+      });
+
     this.observeMessage.next(received);
 
   }

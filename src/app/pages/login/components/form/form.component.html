@@ -8,7 +8,7 @@
   </ion-item>
 
   <div class="invalid-feedback" [hidden]="loginEmail.valid || !loginEmail.dirty">
-    Please insert a valid email
+    Inserisci un'email valida
   </div>
 
   <ion-item>
@@ -21,7 +21,7 @@
 
 
   <div class="invalid-feedback" [hidden]="loginPassword.valid || !loginPassword.dirty">
-    Please insert a valid password
+    Inserisci una password valida
   </div>
   <div class="invalid-feedback" [hidden]="!loginPassword.errors?.minlength">
     aggiungi altri {{loginPassword.errors?.minlength?.requiredLength - loginPassword.errors?.minlength?.actualLength}}
