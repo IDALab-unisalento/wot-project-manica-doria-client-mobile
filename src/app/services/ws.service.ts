@@ -68,7 +68,7 @@ export class WsService {
     received = JSON.parse(msg.body);
     this.datasharing.getCurrentUser().subscribe(
       user => {
-        if (received.user.email === user.email) {
+        if (received.user.email !== user.email) {
           this.notification.schedule({
             title: 'Hai un nuovo messaggio',
             text: received.content
