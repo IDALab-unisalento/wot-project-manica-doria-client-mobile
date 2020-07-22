@@ -72,7 +72,7 @@ export class DetailsComponent implements OnInit {
           this.attachmentService.getAttachment(step.id).subscribe(
             data => {
               this.attachmentList = data;
-              console.log(this.attachmentList);
+              console.log('ATTACHMENT:', this.attachmentList);
             });
         });
     this.startTimer();
@@ -135,6 +135,7 @@ export class DetailsComponent implements OnInit {
         this.check = data;
         if (this.check) {
           this.closeTimer();
+          console.log('TIME:', this.time);
           this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id)
             .subscribe(() => {
               console.log('step completato');

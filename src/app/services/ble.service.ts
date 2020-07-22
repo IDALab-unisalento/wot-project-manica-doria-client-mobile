@@ -29,11 +29,12 @@ export class BleService {
 
     return new Observable(
       obs => {
-        const timer = setTimeout(() => {
+        setTimeout(() => {
           if (!this.result.found) {
             console.log('stopScan Tempo Scaduto');
             this.result = { found: false, retry: true };
             obs.next(this.result);
+            this.ble.stopScan();
             this.utils.showToast({
               header: 'Beacon Non Trovato',
               message: 'Non è stato rilevato nessun beacon con quel nome, avvicinati al macchinario',
@@ -149,7 +150,7 @@ export class BleService {
               cssClass: 'toast-danger'
             });
           }
-        }, 1000);
+        }, 2000);
 
         this.ble.startScan([]).subscribe(device => {
           console.log(device);
@@ -169,11 +170,5 @@ export class BleService {
 
   stopScanBeacon() {
     return this.ble.stopScan();
-  }
-
-
-
-  prova() {
-
   }
 }
