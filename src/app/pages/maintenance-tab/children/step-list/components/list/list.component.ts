@@ -43,7 +43,7 @@ export class ListComponent implements OnInit {
   }
 
   getMaintenanceByStatusAndUser(id: string) {
-    this.userMaintenanceService.getMaintenanceByStatusAndUser('started', id).subscribe(data => {
+    this.userMaintenanceService.getMaintenanceByStatusAndUser('in-progress', id).subscribe(data => {
       console.log(data);
       if (data.length === 0) {
         this.utilsService.showToast({

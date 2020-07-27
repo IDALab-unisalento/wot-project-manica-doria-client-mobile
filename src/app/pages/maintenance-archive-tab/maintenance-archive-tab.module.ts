@@ -13,14 +13,14 @@ import { MaintenanceTabPageModule } from '../maintenance-tab/maintenance-tab.mod
 import { SharedComponentModule } from '../shared/shared.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SharedComponentModule,
-    MaintenanceArchiveTabPageRoutingModule,
-    MaintenanceTabPageModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        SharedComponentModule,
+        MaintenanceArchiveTabPageRoutingModule,
+        MaintenanceTabPageModule,
+    ],
   declarations: [MaintenanceArchiveTabPage, ListComponent, DetailsComponent]
 })
 export class MaintenanceArchiveTabPageModule { }

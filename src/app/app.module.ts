@@ -27,11 +27,12 @@ import { BLE } from '@ionic-native/ble/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { TimerService } from './services/timer.service';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { TimeStepPipe } from './services/pipes/time-step.pipe';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TimeStepPipe],
   entryComponents: [],
   exports: [],
   imports: [
@@ -60,7 +61,8 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     StorageService,
     AuthGuardService,
     TimerService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    TimeStepPipe,
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent]
 })

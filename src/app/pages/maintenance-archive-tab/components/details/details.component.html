@@ -33,7 +33,7 @@
       <ion-label class="ion-text-wrap">
         <h2 class="light-text">{{step.name}}</h2>
         <h3>Durata Stimata: {{step.estimateDuration | date:"hh:mm"}}</h3>
-        <h3>Durata Effettiva: {{step.duration}}</h3>
+        <h3>Durata Effettiva: {{step.duration | date:"hh:mm"}}</h3>
         <a class="warning-text" type="button" (click)="showDescription(step)"> Show More <ion-icon
             style="padding-top: 2px" name="arrow-down-outline"></ion-icon></a>
         <p class=" light-text" [hidden]="!step.description_visible">{{step.description}}</p>

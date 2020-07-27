@@ -134,12 +134,14 @@ export class DetailsComponent implements OnInit {
       data => {
         this.check = data;
         if (this.check) {
-          this.closeTimer();
-          console.log('TIME:', this.time);
-          this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id)
-            .subscribe(() => {
-              console.log('step completato');
-            });
+          this.timerService.closeTimer().subscribe(time => {
+              this.time = time;
+              console.log('TIME:', this.time);
+              this.stepService.completeStep(this.time, this.selectedStep.id, this.selectedUserMaintenance.maintenance.id, this.selectedUserMaintenance.id)
+                  .subscribe(() => {
+                      console.log('step completato');
+                  });
+          });
           this.router.navigate(['..'], { relativeTo: this.route });
         }
       }
@@ -160,7 +162,7 @@ export class DetailsComponent implements OnInit {
   }
 
   closeTimer() {
-    this.timerService.closeTimer().subscribe(time => this.time = time);
+    this.timerService.closeTimer();
   }
 
   showDescription(step: Step) {

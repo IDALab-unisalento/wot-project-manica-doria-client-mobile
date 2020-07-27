@@ -80,7 +80,7 @@ export class SearchCardComponent implements OnInit {
   }
 
   getMaintenanceByStatusAndUser(id: string) {
-    this.userMaintenanceService.getMaintenanceByStatusAndUser('started', id)
+    this.userMaintenanceService.getMaintenanceByStatusAndUser('in-progress', id)
       .subscribe(
         data => {
           this.userMaintenance = data;
